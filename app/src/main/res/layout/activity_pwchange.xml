@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.MyPage.PWChangeActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewPWChangeTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLPWChangeContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewPWChangeTitleBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLPWChangeOriginPW"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="14.5dp"
+            android:background="@drawable/bg_common_edit_text_bg"
+            app:layout_constraintDimensionRatio="h, 33:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ETPWChangeOriginPW"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:hint="@string/str_ko_pw_change_origin_pw_hint"
+                android:includeFontPadding="false"
+                android:inputType="text"
+                android:textColor="@color/text_1"
+                android:textColorHint="#D7D7D7"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLPWChangeNewPW"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_common_edit_text_bg"
+            app:layout_constraintDimensionRatio="h, 33:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CLPWChangeOriginPW"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ETPWChangeNewPW"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:hint="@string/str_ko_join_info_pw_hint"
+                android:includeFontPadding="false"
+                android:inputType="text"
+                android:textColor="@color/text_1"
+                android:textColorHint="#D7D7D7"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLPWChangeNewPWMatch"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_common_edit_text_bg"
+            app:layout_constraintDimensionRatio="h, 33:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CLPWChangeNewPW"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ETPWChangeNewPWMatch"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:hint="@string/str_ko_join_info_pw_match_hint"
+                android:includeFontPadding="false"
+                android:inputType="text"
+                android:textColor="@color/text_1"
+                android:textColorHint="#D7D7D7"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnPWChangeConfirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_common_round_button"
+            android:enabled="true"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_confirm"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h, 32:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971153846"
+            app:layout_constraintWidth_percent="0.888888889" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

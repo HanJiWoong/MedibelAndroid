@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.CustomerInfo.HumanClinicalInfoActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewHumanClinicalTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLHumanClinicalContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalTitleBar">
+
+        <ScrollView
+            android:id="@+id/SVHumanClinical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLHumanClinicalScrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/IVHumanClinicalTemperature"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:src="@drawable/ic_temperature_good"-->
+<!--                    app:layout_constraintDimensionRatio="h,1:1"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.048387097"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintWidth_percent="0.138888889" />-->
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonTemperature
+                    android:id="@+id/ViewHumanClinicalTemperature"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.076923077"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333" />
+                
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonMoisture
+                    android:id="@+id/ViewHumanClinicalMoisture"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.923076923"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333" />
+
+                <TextView
+                    android:id="@+id/TVHumanClinicalDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="17.5dp"
+                    android:text="@string/str_ko_hospital_customer_info_desc"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:textSize="14sp"
+                    android:textColor="#4a545a"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalTemperature"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintDimensionRatio="h,330:36" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewHumanClinicalNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVHumanClinicalDesc"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewHumanClinicalBirthYear"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalNumber"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewHumanClinicalGender"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalBirthYear"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewHumanClinicalRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalGender"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewHospitalCustomerInfoDetailRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalRegion"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewHumanClinicalSymptom"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHospitalCustomerInfoDetailRegion"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewHumanClinicalDisease"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalSymptom"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewHumanClinicalDiagnosis"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalDisease"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewHumanClinicalMemo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalDiagnosis"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/BtnHumanClinicalSend"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_common_round_button"
+                    android:enabled="true"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/str_ko_send"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintDimensionRatio="h, 33:5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewHumanClinicalMemo"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

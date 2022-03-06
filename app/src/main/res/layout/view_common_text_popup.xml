@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    tools:context=".common.popup.CommonTextPopup">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,300:500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.833333333">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLCommonTextPoupTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="h,6:1">
+
+            <TextView
+                android:id="@+id/TVCommonTextPopupTitle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/str_ko_notice"
+                android:textColor="@color/text_1"
+                android:textSize="20sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/IBCommonTextPopupClose"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_common_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w, 1:1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        
+        <View
+            android:id="@+id/ViewCommonTextPopupDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CLCommonTextPoupTitle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <TextView
+            android:id="@+id/TVCommonTextPopupContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="개인 사용자의 경우 입력하지 않아도 되며, 기관명은 수정이 어려우므로 정확히 입력해주세요."
+            android:textAlignment="textStart"
+            android:textColor="@color/text_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/BtnCommonTextPopupConfirm"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/BtnCommonTextPopupConfirm"
+            app:layout_constraintTop_toBottomOf="@id/ViewCommonTextPopupDivider" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnCommonTextPopupConfirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_common_round_button"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_confirm"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.966666667"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintDimensionRatio="h,27:5"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

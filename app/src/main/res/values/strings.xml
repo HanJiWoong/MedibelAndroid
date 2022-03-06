@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">MedivelSkinMeasure</string>
+    <string name="str_ko_login_title">로그인</string>
+    <string name="str_ko_login_hint">아이디를 입력해주세요.</string>
+    <string name="str_ko_login_state_maintain">로그인 상태 유지</string>
+    <string name="str_ko_pw_hint">비밀번호를 입력해주세요.</string>
+    <string name="str_ko_id_find_title">아이디찾기</string>
+    <string name="str_ko_pw_find_title">비밀번호찾기</string>
+    <string name="str_ko_join_title">회원가입</string>
+
+    <string name="str_ko_find_tab_first">이메일로 찾기</string>
+    <string name="str_ko_find_tab_second">휴대폰으로 찾기</string>
+    <string name="str_ko_find_input_name">이름을 입력하세요</string>
+    <string name="str_ko_find_input_id">아이디를 입력하세요</string>
+    <string name="str_ko_find_input_email">이메일을 입력하세요</string>
+    <string name="str_ko_find_input_mobile">휴대폰 번호를 입력하세요</string>
+
+    <string name="str_ko_find">찾기</string>
+    <string name="str_ko_next">다음</string>
+    <string name="str_ko_confirm">확인</string>
+    <string name="str_ko_notice">알림</string>
+    <string name="str_ko_send">전송</string>
+    <string name="str_ko_delete">삭제</string>
+    <string name="str_ko_logout">로그아웃</string>
+    <string name="str_ko_sign_out">회원탈퇴</string>
+
+    <string name="str_ko_lang_kor">한국어</string>
+
+    <string name="str_ko_terms">약관 동의</string>
+    <string name="str_ko_terms_all_agree">모두 동의합니다</string>
+    <string name="str_ko_terms_service_agree">서비스 이용약관 동의 [필수]</string>
+    <string name="str_ko_terms_personal_agree">개인정보 처리방침 동의 [필수]</string>
+
+    <string name="str_ko_terms_service_agree_title">서비스 이용약관</string>
+    <string name="str_ko_terms_personal_agree_title">개인정보 처리방침</string>
+
+    <string name="str_ko_join_info_title">회원가입 정보</string>
+    <string name="str_ko_join_info_name_hint">이름</string>
+    <string name="str_ko_join_info_organization_hint">기관명</string>
+    <string name="str_ko_join_info_id_hint">아이디 (영문, 숫자 가능)</string>
+    <string name="str_ko_join_info_pw_hint">비밀번호 (영문+숫자 혼용 8자리 이상)</string>
+    <string name="str_ko_join_info_pw_match_hint">비밀번호 확인</string>
+    <string name="str_ko_join_info_email_text">이메일</string>
+    <string name="str_ko_join_info_mobile_text">휴대 전화번호</string>
+
+    <string name="str_ko_Join_organization_notice_content">개인 사용자의 경우 입력하지 않아도 되며, 기관명은 수정이 어려우므로 정확히 입력해주세요.</string>
+
+    <string name="str_ko_join_complete_title">회원가입 완료</string>
+    <string name="str_ko_join_complete_txt_1">회원님의 가입이 완료되었습니다.</string>
+    <string name="str_ko_join_complete_txt_2">지금부터 편리하게 피부를 측정하세요\n피부관리를 위한 솔루션 메디벨 바이오 App</string>
+
+    <string name="str_ko_main_txt_1">메디벨 바이오\n오신것을 환영합니다</string>
+    <string name="str_ko_main_txt_2">피부측정 전에 측정대상을 선택하세요</string>
+
+    <string name="str_ko_main_hospital_txt_1">병/의원 피부측정</string>
+    <string name="str_ko_main_hospital_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+
+    <string name="str_ko_main_animal_hospital_txt_1">동물병원 피부측정</string>
+    <string name="str_ko_main_animal_hospital_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+
+    <string name="str_ko_main_beauty_shop_txt_1">뷰티샵 피부측정</string>
+    <string name="str_ko_main_beauty_shop_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+
+    <string name="str_ko_main_clinical_txt_1">임상 피부측정</string>
+    <string name="str_ko_main_clinical_txt_2">어떤 대상의 측정을 원하시나요?\n화면 아래 버튼을 눌러 대상을 선택하세요</string>
+
+    <string name="str_ko_main_clinical_human">사람</string>
+    <string name="str_ko_main_clinical_animal">동물</string>
+
+    <string name="str_ko_main_clinical_human_txt_1">임상(사람) 피부측정</string>
+    <string name="str_ko_main_clinical_human_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+
+    <string name="str_ko_main_clinical_animal_txt_1">임상(동물) 피부측정</string>
+    <string name="str_ko_main_clinical_animal_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+
+    <string name="str_ko_connect_state_title">연결상태</string>
+
+    <string name="str_ko_skin_measure">피부측정</string>
+    <string name="str_ko_skin_measure_start">피부측정을 시작합니다</string>
+    <string name="str_ko_skin_measure_start_desc">- 피부에 측정기기를 접촉시키고 측정버튼을 누르세요\n- 측정기기의 배터리 부족 또는 전원이 꺼질경우 원활한 측정이 어렵습니다. 다시 시작하세요</string>
+    <string name="str_ko_skin_measure_complete">피부측정이 완료 되었습니다</string>
+    <string name="str_ko_skin_measure_complete_desc">- 측정 완료 버튼을 눌러 결과화면을 확인하세요</string>
+    <string name="str_ko_skin_measure_start_btn_title">측정</string>
+    <string name="str_ko_skin_measure_complete_btn_title">측정완료</string>
+
+    <string name="str_ko_skin_measure_result_info">다음을 선택하시면 현재 측정된 이미지로 고객정보를 입력하실 수 있습니다.\n재측정을 선택하시면 현재 측정된 이미지는 취소됩니다.</string>
+    <string name="str_ko_skin_measure_result_retry">재측정</string>
+
+    <string name="str_ko_hospital_customer_info_desc">※  고객번호는 영문 대문자+숫자포함 15자 미만입니다.\n수정이 어려우므로 정확하게 입력하시길 바랍니다</string>
+
+    <string name="str_ko_measure_result">분석결과</string>
+
+    <string name="str_ko_customer_info_title">고객정보</string>
+    <string name="str_ko_customer_info_number_title">고객번호</string>
+    <string name="str_ko_customer_info_number_hint">(영문+숫자) 12자 이내 </string>
+    <string name="str_ko_customer_info_birth_year_title">생년</string>
+    <string name="str_ko_customer_info_gender_title">성별</string>
+    <string name="str_ko_customer_info_region_title">부위</string>
+    <string name="str_ko_customer_info_detail_region_title">상세부위</string>
+
+    <string name="str_ko_human_clinical_title">임상정보</string>
+    <string name="str_ko_human_clinical_number_title">고객번호</string>
+    <string name="str_ko_human_clinical_number_hint">(영문+숫자) 12자 이내 </string>
+    <string name="str_ko_human_clinical_birth_year_title">생년</string>
+    <string name="str_ko_human_clinical_gender_title">성별</string>
+    <string name="str_ko_human_clinical_region_title">부위</string>
+    <string name="str_ko_human_clinical_detail_region_title">부위</string>
+    <string name="str_ko_human_clinical_symton_title">증상</string>
+    <string name="str_ko_human_clinical_disease_title">질환</string>
+    <string name="str_ko_human_clinical_diagnosistitle">진단명</string>
+    <string name="str_ko_human_clinical_memo_title">메모</string>
+    <string name="str_ko_human_clinical_input_hint_1">12자 이내 </string>
+    <string name="str_ko_human_clinical_input_hint_2">30자 이내 </string>
+
+    <string name="str_ko_send_check_title">전송조회</string>
+
+    <string name="str_ko_my_page_title">마이페이지</string>
+    <string name="str_ko_my_page_member_info_modify">회원정보 변경</string>
+    <string name="str_ko_my_page_sign_out">회원탈퇴</string>
+    <string name="str_ko_my_page_pw_change">비밀번호 변경</string>
+    <string name="str_ko_my_page_app_setting">앱 설정</string>
+    <string name="str_ko_my_page_terms">이용약관</string>
+    <string name="str_ko_my_page_personal_info">개인정보 처리방침</string>
+    <string name="str_ko_my_page_home_page">메디벨바이오 홈페이지</string>
+
+    <string name="str_ko_pw_change_origin_pw_hint">기존 비밀번호</string>
+
+    <string name="str_ko_app_setting_language_title">언어설정</string>
+
+    <string name="url_home_page_medibel">https://medivelbio.co.kr/ko</string>
+
+    <string name="intent_key_term_detail_type">IntentKeyTermDetailType</string>
+    <string name="intent_data_term_service">IntentDataService</string>
+    <string name="intent_data_term_personal">IntentDataPersonal</string>
+
+    <string name="intent_key_common_text_popup_title">CommonTextPopupTitle</string>
+    <string name="intent_key_common_text_popup_content">CommonTextPopupContent</string>
+
+    <string name="intent_key_common_List_popup_type">listPopupType</string>
+    <string name="intent_data_common_list_popup_type_birth">생년</string>
+    <string name="intent_data_common_list_popup_type_gender">성별</string>
+    <string name="intent_data_common_list_popup_type_region">부위</string>
+    <string name="intent_data_common_list_popup_type_detail_region">상세부위</string>
+    <string name="intent_data_common_list_popup_type_classification_of_disease">질환분류</string>
+    <string name="intent_data_common_list_popup_type_diagnostic_name">진단명</string>
+</resources>

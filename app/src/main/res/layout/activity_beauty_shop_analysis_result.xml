@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AnalysisResult.BeautyShopAnalysisResultActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewBeautyShopAnalysisResultTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLBeautyShopAnalysisResultContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultTitleBar">
+
+        <ScrollView
+            android:id="@+id/SVBeautyShopAnalysisResult"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLBeautyShopAnalysisResultScrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/TVBeautyShopAnalysisResultCustomerNumberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="17.5dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/str_ko_customer_info_number_title"
+                    android:textColor="@color/text_1"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/TVBeautyShopAnalysisCustomerNumberContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="ABCDEF1234"
+                    android:textColor="#4a545a"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/TVBeautyShopAnalysisResultCustomerNumberTitle"
+                    app:layout_constraintStart_toEndOf="@id/TVBeautyShopAnalysisResultCustomerNumberTitle"
+                    app:layout_constraintTop_toTopOf="@id/TVBeautyShopAnalysisResultCustomerNumberTitle" />
+
+                <TextView
+                    android:id="@+id/TVBeautyShopAnalysisResultCustomerInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="19dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="1900년   |   여   |   얼굴   |   오른볼  "
+                    android:textColor="#4a545a"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVBeautyShopAnalysisResultCustomerNumberTitle" />
+
+
+                <ImageView
+                    android:id="@+id/IVBeautyShopAnalysisResultRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/img_face_region"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVBeautyShopAnalysisResultCustomerInfo"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <ImageView
+                    android:id="@+id/IVBeautyShopAnalysisResultWhiteLED"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/img_white_data"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/IVBeautyShopAnalysisResultRegion"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <ImageView
+                    android:id="@+id/IVBeautyShopAnalysisResultTemperature"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_temperature_good"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.048387097"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/IVBeautyShopAnalysisResultWhiteLED"
+                    app:layout_constraintWidth_percent="0.138888889" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonMoisture
+                    android:id="@+id/ViewBeautyShopAnalysisResultMoisture"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.41025641"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/IVBeautyShopAnalysisResultWhiteLED"
+                    app:layout_constraintWidth_percent="0.458333333" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLBeautyShopAnalysisResultSkinTrouble"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_round_corner_box"
+                    app:layout_constraintDimensionRatio="h, 3:2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultMoisture"
+                    app:layout_constraintWidth_percent="0.916666667" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/CLBeautyShopAnalysisResultSkinTroubleTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,33:4">
+
+                        <TextView
+                            android:id="@+id/TVBeautyShopAnalysisResultSkinTroubleTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="15dp"
+                            android:text="[피부 트러블] 50"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosanscjkkr_bold"
+                            android:textSize="14sp"
+                            android:textColor="#ee7700"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="#e3e4e4"
+                            android:layout_marginStart="15.5dp"
+                            android:layout_marginEnd="15.5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressFreckle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultSkinTroubleTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressAcne"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressFreckle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressFreckle2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressAcne"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLBeautyShopAnalysisResultAntiAging"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_round_corner_box"
+                    app:layout_constraintDimensionRatio="h, 3:2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultSkinTrouble"
+                    app:layout_constraintWidth_percent="0.916666667" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/CLBeautyShopAnalysisResultAntiAgingTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,33:4">
+
+                        <TextView
+                            android:id="@+id/TVBeautyShopAnalysisResultAntiAgingTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="15dp"
+                            android:text="[안티에이징] 50"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosanscjkkr_bold"
+                            android:textSize="14sp"
+                            android:textColor="#ee7700"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="#e3e4e4"
+                            android:layout_marginStart="15.5dp"
+                            android:layout_marginEnd="15.5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressWrinkle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultAntiAgingTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressPore"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressWrinkle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressTexture"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressPore"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLBeautyShopAnalysisResultWhiting"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_round_corner_box"
+                    app:layout_constraintDimensionRatio="h, 33:16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultAntiAging"
+                    app:layout_constraintWidth_percent="0.916666667" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/CLBeautyShopAnalysisResultWhitingTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,33:4">
+
+                        <TextView
+                            android:id="@+id/TVBeautyShopAnalysisResultWhitingTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="15dp"
+                            android:text="[미백] 80"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosanscjkkr_bold"
+                            android:textSize="14sp"
+                            android:textColor="#ee7700"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="#e3e4e4"
+                            android:layout_marginStart="15.5dp"
+                            android:layout_marginEnd="15.5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressTone"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultWhitingTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressFlushing"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressTone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLBeautyShopAnalysisResultHair"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/bg_round_corner_box"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h, 3:2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultWhiting"
+                    app:layout_constraintWidth_percent="0.916666667" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/CLBeautyShopAnalysisResultHairTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,33:4">
+
+                        <TextView
+                            android:id="@+id/TVBeautyShopAnalysisResultHairTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="15dp"
+                            android:text="[모발] 0"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosanscjkkr_bold"
+                            android:textSize="14sp"
+                            android:textColor="#ee7700"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="#e3e4e4"
+                            android:layout_marginStart="15.5dp"
+                            android:layout_marginEnd="15.5dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressScalp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/CLBeautyShopAnalysisResultHairTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressThickness"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressScalp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+                    <com.exs.medivelskinmeasure.common.custom_ui.CustomProgressView
+                        android:id="@+id/ViewBeautyShopAnalysisResultProgressDensity"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ViewBeautyShopAnalysisResultProgressThickness"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="h,11:2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

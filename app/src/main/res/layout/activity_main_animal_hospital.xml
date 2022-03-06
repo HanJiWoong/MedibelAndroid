@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Main.MainAnimalHospitalActivity">
+
+    <com.exs.medivelskinmeasure.UI.Main.Component.CommonMainTop
+        android:id="@+id/ViewMainHumanTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLMainContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewMainHumanTop">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_human_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TVMainHumanTxt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20.5dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_main_animal_hospital_txt_1"
+            android:textColor="@color/text_1"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TVMainHumanTxt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_main_animal_hospital_txt_2"
+            android:textColor="@color/text_4"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TVMainHumanTxt1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnMainHumanMeasureSkin"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_common_round_button"
+            android:enabled="true"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_skin_measure"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h, 33:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.846153846"
+            app:layout_constraintWidth_percent="0.916666667" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLMainHumanShowSendList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_send_list_show"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h, 33:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971153846"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <TextView
+                android:id="@+id/TVMainHumanSendTitle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="전송조회"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_send_list_count"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/TVMainHumanSendCount"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

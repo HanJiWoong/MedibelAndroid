@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="85dp" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLSendCheckItemContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_common_disable_box"
+        app:layout_constraintDimensionRatio="h,330:70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/IVSendCheckItemIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_send_check_example"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintHorizontal_bias="0.051724138"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.212121212" />
+
+        <TextView
+            android:id="@+id/TVSendCheckMeasureTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:textSize="14sp"
+            android:textColor="@color/text_1"
+            android:text="2021-12-12 08:00:00"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toEndOf="@id/IVSendCheckItemIcon"
+            app:layout_constraintEnd_toStartOf="@id/BtnSendCheckDeleteSel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnSendCheck"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/BtnSendCheckDeleteSel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/btn_common_check_box"
+            android:scaleType="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.151515152"
+            />
+        
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

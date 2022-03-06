@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLConnectStateContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_connect_state_item_bg"
+        app:layout_constraintDimensionRatio="h,330:135"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/IBConnectStateChangeName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_connect_state_name_change_disable"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,11:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.945454545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.157894737"
+            app:layout_constraintWidth_percent="0.333333333" />
+
+        <TextView
+            android:id="@+id/TVConnectStateDeviceOriName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="temp device name"
+            android:textColor="@color/text_1"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/IBConnectStateChangeName"
+            app:layout_constraintEnd_toStartOf="@id/IBConnectStateChangeName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/IBConnectStateChangeName" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLConnectStateChangeNameArea"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_connect_state_item_bg"
+            app:layout_constraintDimensionRatio="h,6:1"
+            app:layout_constraintEnd_toEndOf="@id/IBConnectStateChangeName"
+            app:layout_constraintStart_toStartOf="@id/TVConnectStateDeviceOriName"
+            app:layout_constraintTop_toBottomOf="@id/IBConnectStateChangeName">
+
+            <TextView
+                android:id="@+id/TVConnectStateDeviceChangeName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="temp device name"
+                android:textColor="@color/text_1"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

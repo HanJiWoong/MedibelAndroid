@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.CustomerInfo.AnimalHospitalCustomerInfoActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewAnimalHospitalCustomerInfoTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLAnimalHospitalCustomerInfoContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewAnimalHospitalCustomerInfoTitleBar">
+
+        <ScrollView
+            android:id="@+id/SVAnimalHospitalCustomerInfo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLAnimalHospitalCustomerInfoScrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/IVAnimalHospitalCustomerInfoTemperature"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_temperature_good"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.048387097"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.138888889" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonMoisture
+                    android:id="@+id/ViewAnimalHospitalCustomerInfoMoisture"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.41025641"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333" />
+
+                <TextView
+                    android:id="@+id/TVAnimalHospitalCustomerInfoDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="17.5dp"
+                    android:text="@string/str_ko_hospital_customer_info_desc"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:textSize="14sp"
+                    android:textColor="#4a545a"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/IVAnimalHospitalCustomerInfoTemperature"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintDimensionRatio="h,330:36" />
+
+
+                <TextView
+                    android:id="@+id/TVAnimalHospitalCustomerInfoDog"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="견종"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_common_main_color_box"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalHospitalCustomerInfoDesc"
+                    app:layout_constraintWidth_percent="0.138888889"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintHorizontal_bias="0.048387097" />
+
+                <TextView
+                    android:id="@+id/TVAnimalHospitalCustomerInfoCat"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="묘종"
+                    android:textColor="#999999"
+                    android:background="@drawable/bg_common_disable_box"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toEndOf="@id/TVAnimalHospitalCustomerInfoDog"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalHospitalCustomerInfoDesc"
+                    app:layout_constraintWidth_percent="0.138888889"
+                    app:layout_constraintDimensionRatio="h,1:1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLAnimalHospitalCustomerInfoSpecies"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_common_edit_text_bg"
+                    app:layout_constraintEnd_toEndOf="@id/ViewAnimalHospitalCustomerInfoNumber"
+                    app:layout_constraintStart_toEndOf="@id/TVAnimalHospitalCustomerInfoCat"
+                    app:layout_constraintTop_toTopOf="@id/TVAnimalHospitalCustomerInfoCat"
+                    app:layout_constraintBottom_toBottomOf="@id/TVAnimalHospitalCustomerInfoCat">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ETAnimalHospitalCustomerInfoSpecies"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#00FFFFFF"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:hint="종 이름을 입력하세요"
+                        android:includeFontPadding="false"
+                        android:inputType="text"
+                        android:textColor="@color/text_1"
+                        android:textColorHint="#D7D7D7"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewAnimalHospitalCustomerInfoNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalHospitalCustomerInfoDog"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalHospitalCustomerInfoBirthYear"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalHospitalCustomerInfoNumber"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalHospitalCustomerInfoGender"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalHospitalCustomerInfoBirthYear"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalHospitalCustomerInfoRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalHospitalCustomerInfoGender"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/BtnAnimalHospitalCustomerInfoShowAnalysis"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_common_round_button"
+                    android:enabled="true"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/str_ko_send"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintDimensionRatio="h, 33:5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalHospitalCustomerInfoRegion"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

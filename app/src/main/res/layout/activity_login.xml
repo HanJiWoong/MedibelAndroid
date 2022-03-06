@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Member.LoginActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/IVLoginLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/img_login_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h, 191:60"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.206896552"
+        app:layout_constraintWidth_percent="0.530555556" />
+
+    <TextView
+        android:id="@+id/IVLoginTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="@string/str_ko_login_title"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_title"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428109855"
+        app:layout_constraintWidth_percent="0.9166666667" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLLoginID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_common_edit_text_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h, 33:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.516949153"
+        app:layout_constraintWidth_percent="0.916666667">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ETLoginID"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:hint="@string/str_ko_login_hint"
+            android:includeFontPadding="false"
+            android:inputType="text"
+            android:textColor="@color/text_1"
+            android:textColorHint="#D7D7D7"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLLoginPW"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_common_edit_text_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h, 33:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627118644"
+        app:layout_constraintWidth_percent="0.916666667">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ETLoginPW"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:hint="@string/str_ko_pw_hint"
+            android:includeFontPadding="false"
+            android:inputType="textPassword"
+            android:textColor="@color/text_1"
+            android:textColorHint="#D7D7D7"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLLoginMoreFunc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/BtnLogin"
+        app:layout_constraintEnd_toEndOf="@id/CLLoginPW"
+        app:layout_constraintStart_toStartOf="@id/CLLoginPW"
+        app:layout_constraintTop_toBottomOf="@id/CLLoginPW">
+
+        <TextView
+            android:id="@+id/TVLoginFindID"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_id_find_title"
+            android:textAlignment="center"
+            android:textColor="@color/text_2"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/ViewMoreFuncDiv"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/text_2"
+            app:layout_constraintBottom_toBottomOf="@id/TVLoginFindID"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toEndOf="@id/TVLoginFindID"
+            app:layout_constraintTop_toTopOf="@id/TVLoginFindID" />
+
+        <TextView
+            android:id="@+id/TVLoginFindPW"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_pw_find_title"
+            android:textAlignment="center"
+            android:textColor="@color/text_2"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ViewMoreFuncDiv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TVLoginJoin"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center_vertical|end"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_join_title"
+            android:textColor="@color/text_2"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/TVLoginFindPW"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/BtnLogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_common_round_button"
+        android:enabled="true"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="@string/str_ko_login_title"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h, 32:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796610169"
+        app:layout_constraintWidth_percent="0.888888889" />
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
+        android:id="@+id/CBLoginMaintain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h, 33:4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.076923077"
+        app:layout_constraintVertical_bias="0.862903226"
+        app:layout_constraintWidth_percent="0.458333333" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

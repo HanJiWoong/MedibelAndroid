@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Measure.SkinMeasureResultActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewSkinMeasureResultTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLSkinMeasureResultContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewSkinMeasureResultTitleBar">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/IVSkinMeasureResultExample"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/img_measure_test"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLSkinMeasureResultImageShowControl"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintDimensionRatio="h,330:24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/IVSkinMeasureResultExample"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <TextView
+                android:id="@+id/TVSkinMeasureResultControlCount"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="(11/11)"
+                android:textColor="#ee7700"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/IBSkinMeasureResultControlPrev"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_skin_measure_result_control_prev"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/TVSkinMeasureResultControlCount"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/IBSkinMeasureResultControlNext"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_skin_measure_result_control_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/TVSkinMeasureResultControlCount"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/TVskinMeasureResultInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_skin_measure_result_info"
+            android:textColor="@color/text_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/CLSkinMeasureResultImageShowControl"
+            app:layout_constraintStart_toStartOf="@id/CLSkinMeasureResultImageShowControl"
+            app:layout_constraintTop_toBottomOf="@id/CLSkinMeasureResultImageShowControl" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnSkinMeasureRetry"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_skin_measure_retry_button"
+            android:enabled="true"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_skin_measure_result_retry"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h, 16:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971153846"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintWidth_percent="0.444444444" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BtnSkinMeasureNext"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_common_round_button"
+            android:enabled="true"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/str_ko_next"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h, 16:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971153846"
+            app:layout_constraintHorizontal_bias="0.925"
+            app:layout_constraintWidth_percent="0.444444444" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

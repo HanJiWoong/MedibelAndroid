@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.MyPage.MyPageActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewMyPageTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLMyPageContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewMyPageTitleBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLMyPageLogout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#eeeeee"
+            app:layout_constraintDimensionRatio="h,36:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/TVMyPageLogoutID"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="ABCD1234"
+                android:textColor="#4a545a"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/BtnMyPageLogout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/BtnMyPageLogout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_common_main_color_round_box"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/str_ko_logout"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h,8:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.946428571"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.222222222" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#cccccc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPageMemberInfoModify"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CLMyPageLogout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPageSignOut"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPageMemberInfoModify"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPagePWChange"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPageSignOut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPageAppSetting"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPagePWChange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPageTerms"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPageAppSetting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPagePersonalInfo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPageTerms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+        <com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
+            android:id="@+id/ViewMyPageHomePage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ViewMyPagePersonalInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="h,360:54" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

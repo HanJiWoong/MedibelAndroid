@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/TVCommonDropDownTitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="고객번호"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:textSize="14sp"
+        android:textColor="@color/text_1"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.212121212"/>
+
+    <TextView
+        android:id="@+id/TVCommonDropDownContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="17dp"
+        android:text="고객번호"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="14sp"
+        android:textColor="@color/text_5"
+        android:gravity="center_vertical|end"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toEndOf="@id/TVCommonDropDownTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/IVCommonDropDownIcon"/>
+
+    <ImageView
+        android:id="@+id/IVCommonDropDownIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_show_list_popup"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.491566265"
+        app:layout_constraintWidth_percent="0.045757576"
+        app:layout_constraintDimensionRatio="h, 151:85"/>
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

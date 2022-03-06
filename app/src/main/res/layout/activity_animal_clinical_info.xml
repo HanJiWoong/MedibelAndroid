@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.CustomerInfo.AnimalClinicalInfoActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewAnimalClinicalCustomerInfoTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLAnimalClinicalCustomerInfoContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalCustomerInfoTitleBar">
+
+        <ScrollView
+            android:id="@+id/SVAnimalClinicalCustomerInfo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLAnimalClinicalCustomerInfoScrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonTemperature
+                    android:id="@+id/ViewAnimalClinicalCustomerInfoTemperature"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.076923077"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonMoisture
+                    android:id="@+id/ViewAnimalClinicalCustomerInfoMoisture"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintDimensionRatio="h,33:10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.923076923"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333" />
+
+
+                <TextView
+                    android:id="@+id/TVAnimalClinicalCustomerInfoDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="17.5dp"
+                    android:text="@string/str_ko_hospital_customer_info_desc"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:textSize="14sp"
+                    android:textColor="#4a545a"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalCustomerInfoMoisture"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintDimensionRatio="h,330:36" />
+
+
+                <TextView
+                    android:id="@+id/TVAnimalClinicalCustomerInfoDog"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="견종"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_common_main_color_box"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalClinicalCustomerInfoDesc"
+                    app:layout_constraintWidth_percent="0.138888889"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintHorizontal_bias="0.048387097" />
+
+                <TextView
+                    android:id="@+id/TVAnimalClinicalCustomerInfoCat"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="묘종"
+                    android:textColor="#999999"
+                    android:background="@drawable/bg_common_disable_box"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toEndOf="@id/TVAnimalClinicalCustomerInfoDog"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalClinicalCustomerInfoDesc"
+                    app:layout_constraintWidth_percent="0.138888889"
+                    app:layout_constraintDimensionRatio="h,1:1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLAnimalClinicalCustomerInfoSpecies"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_common_edit_text_bg"
+                    app:layout_constraintEnd_toEndOf="@id/ViewAnimalClinicalNumber"
+                    app:layout_constraintStart_toEndOf="@id/TVAnimalClinicalCustomerInfoCat"
+                    app:layout_constraintTop_toTopOf="@id/TVAnimalClinicalCustomerInfoCat"
+                    app:layout_constraintBottom_toBottomOf="@id/TVAnimalClinicalCustomerInfoCat">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ETAnimalClinicalCustomerInfoSpecies"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#00FFFFFF"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:hint="종 이름을 입력하세요"
+                        android:includeFontPadding="false"
+                        android:inputType="text"
+                        android:textColor="@color/text_1"
+                        android:textColorHint="#D7D7D7"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewAnimalClinicalNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVAnimalClinicalCustomerInfoDog"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalClinicalBirthYear"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalNumber"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalClinicalGender"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalBirthYear"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalClinicalRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalGender"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewAnimalClinicalSymptom"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalRegion"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalClinicalDieases"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalSymptom"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
+                    android:id="@+id/ViewAnimalClinicalDiagnosis"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalDieases"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+                <com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
+                    android:id="@+id/ViewAnimalClinicalMemo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalDiagnosis"
+                    app:layout_constraintDimensionRatio="h,33:5"
+                    app:layout_constraintWidth_percent="0.9166666667" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/BtnAnimalClinicalSend"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/bg_common_round_button"
+                    android:enabled="true"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/str_ko_send"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintDimensionRatio="h, 33:5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ViewAnimalClinicalMemo"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AnalysisResult.HospitalAnalysisResultActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewHospitalAnalysisResultTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLHospitalAnalysisResultContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewHospitalAnalysisResultTitleBar">
+
+        <ScrollView
+            android:id="@+id/SVHospitalAnalysisResult"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLHospitalAnalysisResultScrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/TVHospitalAnalysisResultCustomerNumberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17.5dp"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/str_ko_customer_info_number_title"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_1"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/TVHospitalAnalysisCustomerNumberContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:text="ABCDEF1234"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:textSize="14sp"
+                    android:textColor="#4a545a"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toEndOf="@id/TVHospitalAnalysisResultCustomerNumberTitle"
+                    app:layout_constraintTop_toTopOf="@id/TVHospitalAnalysisResultCustomerNumberTitle"
+                    app:layout_constraintBottom_toBottomOf="@id/TVHospitalAnalysisResultCustomerNumberTitle"/>
+
+                <TextView
+                    android:id="@+id/TVHospitalAnalysisResultCustomerInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginStart="15dp"
+                    android:text="1900년   |   여   |   얼굴   |   오른볼  "
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:textSize="14sp"
+                    android:textColor="#4a545a"
+                    android:includeFontPadding="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TVHospitalAnalysisResultCustomerNumberTitle" />
+
+
+                <ImageView
+                    android:id="@+id/IVHospitalAnalysisResultRegion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/img_face_region"
+                    app:layout_constraintTop_toBottomOf="@id/TVHospitalAnalysisResultCustomerInfo"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <ImageView
+                    android:id="@+id/IVHospitalAnalysisResultWater"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/img_server_data"
+                    app:layout_constraintTop_toBottomOf="@id/IVHospitalAnalysisResultRegion"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <ImageView
+                    android:id="@+id/IVHospitalAnalysisResultWhiteLED"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/img_white_data"
+                    app:layout_constraintTop_toBottomOf="@id/IVHospitalAnalysisResultWater"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintWidth_percent="0.9166666667"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+                
+                <com.exs.medivelskinmeasure.common.custom_ui.CommonMoisture
+                    android:id="@+id/ViewHospitalAnalysisResultMoisture"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="13dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/IVHospitalAnalysisResultWhiteLED"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent="0.458333333"
+                    app:layout_constraintHorizontal_bias="0.076923077"
+                    app:layout_constraintDimensionRatio="h,33:10"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
