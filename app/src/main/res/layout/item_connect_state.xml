@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CLConnectStateItem"
     android:layout_width="match_parent"
     android:layout_height="150dp" >
 
@@ -20,7 +21,7 @@
             android:layout_height="0dp"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
-            android:src="@drawable/btn_connect_state_name_change_disable"
+            android:src="@drawable/btn_connect_state_name_change"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="h,11:4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +39,7 @@
             android:fontFamily="@font/notosanscjkkr_medium"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:text="temp device name"
+            android:text=""
             android:textColor="@color/text_1"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/IBConnectStateChangeName"
@@ -66,7 +67,7 @@
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:text="temp device name"
+                android:text=""
                 android:textColor="@color/text_1"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,10 +75,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLConnectStateDeviceChangeName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/ETConnectStateDeviceChangeName"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_1"
+                    android:textSize="14sp"
+                    android:background="#00FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/IBConnectStateDeviceChangeNameCancel"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/IBConnectStateDeviceChangeNameCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_common_close"
+                    android:background="#00FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
