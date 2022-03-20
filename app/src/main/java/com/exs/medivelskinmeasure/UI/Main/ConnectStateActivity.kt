@@ -48,33 +48,50 @@ class ConnectStateActivity : AppCompatActivity() {
     private lateinit var mRVList: RecyclerView
     private lateinit var mListAdapter: ConnectStateAdapter
 
-    private lateinit var mBtClient:BluetoothClient
+    private lateinit var mBtClient: BluetoothClient
 
     private val mOnSocketListener: SocketListener = object : SocketListener {
         override fun onConnect() {
-            Log.e(TAG,"Connect!\n")
+            Log.e(TAG, "Connect!\n")
 //            isConnected = true
+            Toast.makeText(this@ConnectStateActivity, "블루투스 연결", Toast.LENGTH_SHORT)
         }
 
         override fun onDisconnect() {
-            Log.e(TAG,"Disconnect!\n")
+            Log.e(TAG, "Disconnect!\n")
 //            isConnected = false
+            Toast.makeText(this@ConnectStateActivity, "블루투스 해제", Toast.LENGTH_SHORT)
         }
 
         override fun onError(e: Exception?) {
-            e?.let { Log.e(TAG,e.toString() + "\n") }
+            e?.let {
+                Log.e(TAG, e.toString() + "\n")
+                Toast.makeText(
+                    this@ConnectStateActivity,
+                    "블루투스 에러 ${it.toString()}",
+                    Toast.LENGTH_LONG
+                )
+            }
+
         }
 
         override fun onReceive(msg: String?) {
-            msg?.let { Log.e(TAG,"Receive : $it\n") }
+            msg?.let {
+                Log.e(TAG, "Receive : $it\n")
+                Toast.makeText(this@ConnectStateActivity, "Receivc : ${it}", Toast.LENGTH_SHORT)
+            }
+
         }
 
         override fun onSend(msg: String?) {
-            msg?.let { Log.e(TAG,"Send : $it\n") }
+            msg?.let {
+                Log.e(TAG, "Send : $it\n")
+                Toast.makeText(this@ConnectStateActivity, "Send : ${it}", Toast.LENGTH_SHORT)
+            }
         }
 
         override fun onLogPrint(msg: String?) {
-            msg?.let { Log.e(TAG,"$it\n") }
+            msg?.let { Log.e(TAG, "$it\n") }
         }
     }
 
@@ -162,7 +179,7 @@ class ConnectStateActivity : AppCompatActivity() {
             }
         }
 
-        mListAdapter.setDeviceList(list,mBtClient)
+        mListAdapter.setDeviceList(list, mBtClient)
     }
 
     override fun onRequestPermissionsResult(
@@ -186,9 +203,9 @@ class ConnectStateActivity : AppCompatActivity() {
 class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStateViewHolder>() {
     private var mArrListDevice: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var mContext: Context
-    private var mBtClient:BluetoothClient? = null
+    private var mBtClient: BluetoothClient? = null
 
-    fun setDeviceList(list: ArrayList<BluetoothDevice>, btClient:BluetoothClient) {
+    fun setDeviceList(list: ArrayList<BluetoothDevice>, btClient: BluetoothClient) {
         mArrListDevice = list
         mBtClient = btClient
     }
@@ -212,7 +229,7 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
 
     inner class ConnectStateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var mResult:BluetoothDevice? = null
+        var mResult: BluetoothDevice? = null
 
         var mCLItem: ConstraintLayout
         var mTVOriDeviceName: TextView
