@@ -92,45 +92,73 @@ class BluetoothClient(context:Context) {
         }
     }
 
+    fun connected(socket: BluetoothSocket?) {
+        // Cancel the thread that completed the connection
+        if (clientThread != null) {
+            clientThread?.stopThread()
+            clientThread = null
+        }
+
+        // Cancel any thread currently running a connection
+        if (commThread != null) {
+            commThread?.stopThread()
+            commThread = null
+        }
+
+        // Start the thread to manage the connection and perform transmissions
+        commThread = CommThread(socket)
+        commThread?.start()
+
+//        // Send the name of the connected device back to the UI Activity
+//        MainActivity.settingsFragment?.activity?.runOnUiThread {
+//            (MainActivity.settingsFragment as SettingsFragment).btConnected()
+//        }
+
+    }
+
     @SuppressLint("MissingPermission")
-    inner class ClientThread(device: BluetoothDevice) : Thread() {
+    inner class ClientThread(val device: BluetoothDevice) : Thread() {
         private var socket: BluetoothSocket? = null
 
         @SuppressLint("MissingPermission")
         override fun run() {
 //            btAdapter.cancelDiscovery()
 
-            try {
-                onLogPrint("Try to connect to server..")
+            for (uuid in device.uuids) {
+                try {
+                    onLogPrint("Try to connect to server..")
+                    val mmSocket: BluetoothSocket? =
+                        device.createRfcommSocketToServiceRecord(uuid.uuid)
 
-                socket?.connect()
-            } catch (e: Exception) {
-                onError(e)
+                    mmSocket?.let { thisSocket ->
+                        thisSocket.connect()
 
-                e.printStackTrace()
-                disconnectFromServer()
+                        socket = thisSocket
+                        connected(socket)
+                    }
+
+                    break
+                } catch (e: Exception) {
+                    stopThread()
+
+                    onError(e)
+
+                    e.printStackTrace()
+
+                }
             }
 
-            if (socket != null) {
-                onConnect()
-
-                commThread = CommThread(socket)
-                commThread?.start()
-            }
+//            if (socket != null) {
+//                onConnect()
+//
+//                commThread = CommThread(socket)
+//                commThread?.start()
+//            }
         }
 
         fun stopThread() {
             try {
                 socket?.close()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-        init {
-            try {
-
-                socket = device.createRfcommSocketToServiceRecord(device.uuids.get(1).uuid)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

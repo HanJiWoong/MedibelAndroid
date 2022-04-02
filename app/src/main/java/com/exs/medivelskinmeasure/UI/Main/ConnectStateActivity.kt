@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.MainThread
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
@@ -48,33 +49,48 @@ class ConnectStateActivity : AppCompatActivity() {
     private lateinit var mRVList: RecyclerView
     private lateinit var mListAdapter: ConnectStateAdapter
 
-    private lateinit var mBtClient:BluetoothClient
+    private lateinit var mBtClient: BluetoothClient
 
     private val mOnSocketListener: SocketListener = object : SocketListener {
         override fun onConnect() {
-            Log.e(TAG,"Connect!\n")
 //            isConnected = true
+            showToast("블루투스 기기 연결됨")
         }
 
         override fun onDisconnect() {
-            Log.e(TAG,"Disconnect!\n")
 //            isConnected = false
+            showToast("블루투스 기기 연결 끊어짐")
         }
 
         override fun onError(e: Exception?) {
-            e?.let { Log.e(TAG,e.toString() + "\n") }
+            e?.let {
+                showToast(it.toString())
+            }
+
         }
 
         override fun onReceive(msg: String?) {
-            msg?.let { Log.e(TAG,"Receive : $it\n") }
+            msg?.let {
+                showToast("Receive : $it\n")
+            }
         }
 
         override fun onSend(msg: String?) {
-            msg?.let { Log.e(TAG,"Send : $it\n") }
+            msg?.let {
+                showToast("Send : $it\n")
+            }
         }
 
         override fun onLogPrint(msg: String?) {
-            msg?.let { Log.e(TAG,"$it\n") }
+            msg?.let { Log.e(TAG, "$it\n") }
+        }
+    }
+
+    fun showToast(msg: String) {
+        runOnUiThread {
+            Log.e(TAG, msg)
+            Toast.makeText(this@ConnectStateActivity, msg, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -128,7 +144,7 @@ class ConnectStateActivity : AppCompatActivity() {
 
         if (requestCode == REQUEST_BT_ENABLE) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "블루투스가 활성화 되었습니다.", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "블루투스가 활성화 되었습니다.", Toast.LENGTH_SHORT).show()
 
                 CommonUtil.requestPermissions(
                     this,
@@ -141,7 +157,7 @@ class ConnectStateActivity : AppCompatActivity() {
                     setListData()
                 }
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show()
 
                 finish()
             }
@@ -154,15 +170,28 @@ class ConnectStateActivity : AppCompatActivity() {
         val devices: Set<BluetoothDevice>? = BluetoothObject.requestPairedDevices()
         var list = ArrayList<BluetoothDevice>()
 
+        var isExist: Boolean = false
+
         devices?.let { devicelist ->
             devicelist.forEach { device ->
                 if (device.name.contains("WAVU")) {
+                    isExist = true
                     list.add(device)
+//                    Toast.makeText(
+//                        this@ConnectStateActivity,
+//                        "${device.name}이 검색 됨.",
+//                        Toast.LENGTH_LONG
+//                    ).show()
                 }
             }
         }
 
-        mListAdapter.setDeviceList(list,mBtClient)
+        if (!isExist) {
+            Toast.makeText(this@ConnectStateActivity, "검색된 장비가 없습니다.", Toast.LENGTH_LONG).show()
+        }
+
+        mListAdapter.setDeviceList(list, mBtClient)
+        mListAdapter.notifyDataSetChanged()
     }
 
     override fun onRequestPermissionsResult(
@@ -174,10 +203,26 @@ class ConnectStateActivity : AppCompatActivity() {
 
         when (requestCode) {
             REQUEST_BT_ENABLE -> {
+                Log.e(TAG, "RQUEST_BT_ENABLED")
 
+//                CommonUtil.requestPermissions(
+//                    this,
+//                    Manifest.permission.BLUETOOTH_CONNECT,
+//                    REQUEST_BT_CONNECTION
+//                ) {
+//                    mBtClient = BluetoothClient(this)
+//                    mBtClient.setOnSocketListener(mOnSocketListener)
+//
+//                    setListData()
+//                }
             }
             REQUEST_BT_CONNECTION -> {
+                Log.e(TAG, "RQUEST_BT_CONNECTION")
 
+                mBtClient = BluetoothClient(this)
+                mBtClient.setOnSocketListener(mOnSocketListener)
+
+                setListData()
             }
         }
     }
@@ -186,9 +231,9 @@ class ConnectStateActivity : AppCompatActivity() {
 class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStateViewHolder>() {
     private var mArrListDevice: ArrayList<BluetoothDevice> = ArrayList()
     private lateinit var mContext: Context
-    private var mBtClient:BluetoothClient? = null
+    private var mBtClient: BluetoothClient? = null
 
-    fun setDeviceList(list: ArrayList<BluetoothDevice>, btClient:BluetoothClient) {
+    fun setDeviceList(list: ArrayList<BluetoothDevice>, btClient: BluetoothClient) {
         mArrListDevice = list
         mBtClient = btClient
     }
@@ -212,7 +257,7 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
 
     inner class ConnectStateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var mResult:BluetoothDevice? = null
+        var mResult: BluetoothDevice? = null
 
         var mCLItem: ConstraintLayout
         var mTVOriDeviceName: TextView
