@@ -343,6 +343,9 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
             }
 
             mCLItem.setOnClickListener {
+
+                it.isSelected = !it.isSelected
+
                 mResult?.let { device ->
                     mBtClient?.let {
                         it.connectToServer(device)
