@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Main.Connection.DeviceInfoActivity">
+
+    <com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+        android:id="@+id/ViewDeviceInfoTitleBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,36:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CLDeviceInfoContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ViewDeviceInfoTitleBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLDeviceInfoChangeNameCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_connect_state_item_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,330:114"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.030769231"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <TextView
+                android:id="@+id/TVDeviceInfoChangeNameSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="장비 아이디"
+                android:textColor="@color/text_1"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/CLDeviceInfoChangeNameArea"
+                app:layout_constraintStart_toStartOf="@id/CLDeviceInfoChangeNameArea" />
+
+            <TextView
+                android:id="@+id/TVDeviceInfoChangeNameOri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="WAVU-1A-2B-3C-4A"
+                android:textColor="@color/text_2"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/TVDeviceInfoChangeNameSubject"
+                app:layout_constraintStart_toEndOf="@id/TVDeviceInfoChangeNameSubject"
+                app:layout_constraintTop_toTopOf="@id/TVDeviceInfoChangeNameSubject" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLDeviceInfoChangeNameArea"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_common_edit_text_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h,300:49"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.769230769"
+                app:layout_constraintWidth_percent="0.909090909">
+
+                <TextView
+                    android:id="@+id/TVDeviceInfoChangeName"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="WAVU-1A-2B-3C-4A"
+                    android:textColor="@color/text_1"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/CLDeviceInfoChangeNameEditArea"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_common_edit_text_helight_bg"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ETDeviceInfoChangeName"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="15dp"
+                        android:background="#00FFFFFF"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="WAVU-1A-2B-3C-4A"
+                        android:textColor="@color/text_1"
+                        android:textSize="14sp"
+                        android:imeOptions="actionDone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/BtnDeviceInfoChangeNameConfirm"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/BtnDeviceInfoChangeNameConfirm"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#00FFFFFF"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:text="@string/str_ko_confirm"
+                        android:textColor="@color/main_concept"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLDeviceInfoAPCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_connect_state_item_bg"
+            app:layout_constraintDimensionRatio="h,330:245"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CLDeviceInfoChangeNameCard"
+            app:layout_constraintWidth_percent="0.916666667">
+
+            <TextView
+                android:id="@+id/TVDeviceInfoAPSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="AP 정보"
+                android:textColor="@color/text_1"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/CLDeviceInfoAPSSIDArea"
+                app:layout_constraintStart_toStartOf="@id/CLDeviceInfoAPSSIDArea" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLDeviceInfoAPSSIDArea"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_common_edit_text_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h,300:49"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25"
+                app:layout_constraintWidth_percent="0.909090909">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/ETDeviceInfoAPSSID"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="15dp"
+                    android:background="#00FFFFFF"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:gravity="center_vertical"
+                    android:hint="AP SSID 입력"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_1"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:imeOptions="actionDone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CLDeviceInfoAPPWArea"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_common_edit_text_bg"
+                app:layout_constraintDimensionRatio="h,300:49"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CLDeviceInfoAPSSIDArea"
+                app:layout_constraintWidth_percent="0.909090909">
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/ETDeviceInfoAPPW"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="15dp"
+                    android:background="#00FFFFFF"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:gravity="center_vertical"
+                    android:hint="AP Password 입력"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_1"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:imeOptions="actionDone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/BtnDeviceInfoConnection"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_common_round_button"
+                android:enabled="false"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/str_ko_connect"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h, 32:5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.917948718"
+                app:layout_constraintWidth_percent="0.909090909" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

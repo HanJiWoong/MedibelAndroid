@@ -30,10 +30,12 @@ import com.exs.medivelskinmeasure.Device.BluetoothClient
 import com.exs.medivelskinmeasure.Device.BluetoothObject
 import com.exs.medivelskinmeasure.Device.SocketListener
 import com.exs.medivelskinmeasure.R
+import com.exs.medivelskinmeasure.UI.Main.Connection.DeviceInfoActivity
 import com.exs.medivelskinmeasure.UI.Member.Join.JoinActivity
 import com.exs.medivelskinmeasure.UI.Member.Join.TermDetailActivity
 import com.exs.medivelskinmeasure.common.CommonUtil
 import com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
+import com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
 import org.w3c.dom.Text
 
@@ -51,14 +53,15 @@ class ConnectStateActivity : AppCompatActivity() {
 
     private lateinit var mBtClient: BluetoothClient
 
+    private var mDeviceList: ArrayList<BluetoothDevice> = arrayListOf()
+
     private val mOnSocketListener: SocketListener = object : SocketListener {
+        @SuppressLint("MissingPermission")
         override fun onConnect() {
-//            isConnected = true
-            showToast("블루투스 기기 연결됨")
+
         }
 
         override fun onDisconnect() {
-//            isConnected = false
             showToast("블루투스 기기 연결 끊어짐")
         }
 
@@ -78,7 +81,26 @@ class ConnectStateActivity : AppCompatActivity() {
         override fun onSend(msg: String?) {
             msg?.let {
                 showToast("Send : $it\n")
+                Log.e(TAG, "Send : $it\n")
             }
+        }
+
+        @SuppressLint("MissingPermission")
+        override fun onSearch(device: BluetoothDevice) {
+            var isExist = false
+
+            for (deviceInList in mDeviceList) {
+                if (device.name.equals(deviceInList.name)) {
+                    isExist = true
+                    break
+                }
+            }
+
+            if (!isExist) {
+                mDeviceList.add(device)
+                setListData()
+            }
+
         }
 
         override fun onLogPrint(msg: String?) {
@@ -106,18 +128,29 @@ class ConnectStateActivity : AppCompatActivity() {
         } else {
             CommonUtil.requestPermissions(
                 this,
-                Manifest.permission.BLUETOOTH_CONNECT,
+                arrayOf(
+                    Manifest.permission.BLUETOOTH_CONNECT,
+                    Manifest.permission.BLUETOOTH_SCAN,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ),
                 REQUEST_BT_CONNECTION
             ) {
                 mBtClient = BluetoothClient(this)
                 mBtClient.setOnSocketListener(mOnSocketListener)
 
-                setListData()
+                mBtClient.scanStart()
             }
         }
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        mListAdapter.notifyDataSetChanged()
+
+    }
 
     private fun initUI() {
         mTitleBar = findViewById(R.id.ViewConnectStateTitleBar)
@@ -148,13 +181,17 @@ class ConnectStateActivity : AppCompatActivity() {
 
                 CommonUtil.requestPermissions(
                     this,
-                    Manifest.permission.BLUETOOTH_CONNECT,
+                    arrayOf(
+                        Manifest.permission.BLUETOOTH_CONNECT,
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ),
                     REQUEST_BT_CONNECTION
                 ) {
                     mBtClient = BluetoothClient(this)
                     mBtClient.setOnSocketListener(mOnSocketListener)
+                    mBtClient.scanStart()
 
-                    setListData()
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show()
@@ -167,30 +204,7 @@ class ConnectStateActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun setListData() {
 
-        val devices: Set<BluetoothDevice>? = BluetoothObject.requestPairedDevices()
-        var list = ArrayList<BluetoothDevice>()
-
-        var isExist: Boolean = false
-
-        devices?.let { devicelist ->
-            devicelist.forEach { device ->
-                if (device.name.contains("WAVU")) {
-                    isExist = true
-                    list.add(device)
-//                    Toast.makeText(
-//                        this@ConnectStateActivity,
-//                        "${device.name}이 검색 됨.",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-                }
-            }
-        }
-
-        if (!isExist) {
-            Toast.makeText(this@ConnectStateActivity, "검색된 장비가 없습니다.", Toast.LENGTH_LONG).show()
-        }
-
-        mListAdapter.setDeviceList(list, mBtClient)
+        mListAdapter.setDeviceList(mDeviceList, mBtClient)
         mListAdapter.notifyDataSetChanged()
     }
 
@@ -205,16 +219,19 @@ class ConnectStateActivity : AppCompatActivity() {
             REQUEST_BT_ENABLE -> {
                 Log.e(TAG, "RQUEST_BT_ENABLED")
 
-//                CommonUtil.requestPermissions(
-//                    this,
-//                    Manifest.permission.BLUETOOTH_CONNECT,
-//                    REQUEST_BT_CONNECTION
-//                ) {
-//                    mBtClient = BluetoothClient(this)
-//                    mBtClient.setOnSocketListener(mOnSocketListener)
-//
-//                    setListData()
-//                }
+                CommonUtil.requestPermissions(
+                    this,
+                    arrayOf(
+                        Manifest.permission.BLUETOOTH_CONNECT,
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ),
+                    REQUEST_BT_CONNECTION
+                ) {
+                    mBtClient = BluetoothClient(this)
+                    mBtClient.setOnSocketListener(mOnSocketListener)
+                    mBtClient.scanStart()
+                }
             }
             REQUEST_BT_CONNECTION -> {
                 Log.e(TAG, "RQUEST_BT_CONNECTION")
@@ -222,7 +239,7 @@ class ConnectStateActivity : AppCompatActivity() {
                 mBtClient = BluetoothClient(this)
                 mBtClient.setOnSocketListener(mOnSocketListener)
 
-                setListData()
+                mBtClient.scanStart()
             }
         }
     }
@@ -239,8 +256,9 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConnectStateViewHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_connect_state, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.view_common_text_list, parent, false)
         mContext = parent.context
         return ConnectStateViewHolder(view)
     }
@@ -258,96 +276,38 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
     inner class ConnectStateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var mResult: BluetoothDevice? = null
-
-        var mCLItem: ConstraintLayout
-        var mTVOriDeviceName: TextView
-        var mTVChangeDeviceName: TextView
-        var mBtnChangeDeviceName: AppCompatImageButton
-        var mCLChangeDeviceName: ConstraintLayout
-        var mETChangeDeviceName: AppCompatEditText
-        var mBtnChangeDeviceNameCancel: AppCompatImageButton
+        var mTVTitle: TextView
+        var mView: View
 
         init {
-            mCLItem = itemView.findViewById(R.id.CLConnectStateItem)
-            mTVOriDeviceName = itemView.findViewById(R.id.TVConnectStateDeviceOriName)
-            mTVChangeDeviceName = itemView.findViewById(R.id.TVConnectStateDeviceChangeName)
-            mBtnChangeDeviceName = itemView.findViewById(R.id.IBConnectStateChangeName)
-            mCLChangeDeviceName = itemView.findViewById(R.id.CLConnectStateDeviceChangeName)
-            mETChangeDeviceName = itemView.findViewById(R.id.ETConnectStateDeviceChangeName)
-            mBtnChangeDeviceNameCancel =
-                itemView.findViewById(R.id.IBConnectStateDeviceChangeNameCancel)
-
-            mBtnChangeDeviceName.isSelected = false
-            mCLChangeDeviceName.visibility = View.GONE
+            mView = itemView
+            mTVTitle = itemView.findViewById(R.id.TVCommonTextListTitle)
         }
 
         @SuppressLint("MissingPermission")
         fun bind(result: BluetoothDevice) {
             mResult = result
 
-            mTVOriDeviceName.text = result.name
-            mTVChangeDeviceName.text = result.name
+
+            var presentStr: String = result.name
 
             val storedName: String? = CommonUtil.getPreferenceString(mContext, result.name)
 
             storedName?.let {
                 if (!it.isEmpty()) {
-                    mTVChangeDeviceName.text = it
+                    presentStr += "(${it})"
                 }
             }
 
-            mETChangeDeviceName.setText(mTVChangeDeviceName.text)
+            mTVTitle.text = presentStr
 
-            mBtnChangeDeviceName.setOnClickListener {
-                if (it.isSelected) {
-                    mCLChangeDeviceName.visibility = View.GONE
-                    mTVChangeDeviceName.visibility = View.VISIBLE
+            mView.setOnClickListener {
+                Log.e("TEST", mResult!!.name)
 
-                    it.isSelected = false
+                val intent = Intent(mContext,DeviceInfoActivity::class.java)
+                intent.putExtra(mContext.getString(R.string.intent_key_bluetooth_device_info),mResult)
+                mContext.startActivity(intent)
 
-                    CommonUtil.hideKeyboard(mContext, mETChangeDeviceName)
-
-                    if (!mETChangeDeviceName.text.toString().isEmpty()) {
-                        CommonUtil.setPreferenceString(
-                            mContext,
-                            result.name,
-                            mETChangeDeviceName.text.toString()
-                        )
-
-                        mTVChangeDeviceName.text = mETChangeDeviceName.text
-                    }
-
-                    mETChangeDeviceName.setText(mTVChangeDeviceName.text)
-
-
-                } else {
-                    mCLChangeDeviceName.visibility = View.VISIBLE
-                    mTVChangeDeviceName.visibility = View.GONE
-
-                    it.isSelected = true
-                    mETChangeDeviceName.requestFocus()
-
-                    CommonUtil.showKeyboard(mContext, mETChangeDeviceName)
-                }
-            }
-
-            mBtnChangeDeviceNameCancel.setOnClickListener {
-                mCLChangeDeviceName.visibility = View.GONE
-                mTVChangeDeviceName.visibility = View.VISIBLE
-
-                mBtnChangeDeviceName.isSelected = false
-
-                CommonUtil.hideKeyboard(mContext, mETChangeDeviceName)
-
-                mETChangeDeviceName.setText(mTVChangeDeviceName.text)
-            }
-
-            mCLItem.setOnClickListener {
-                mResult?.let { device ->
-                    mBtClient?.let {
-                        it.connectToServer(device)
-                    }
-                }
             }
 
         }

@@ -1,30 +1,100 @@
 package com.exs.medivelskinmeasure.Device
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothSocket
+import android.bluetooth.*
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
+import android.util.Log
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.lang.reflect.Method
+import java.util.*
+import kotlin.collections.ArrayList
 
-class BluetoothClient(context:Context) {
+class BluetoothClient(context: Context) {
+    private val TAG = "BluetoothClient"
+    private lateinit var mContext: Context
 
-//    private var btAdapter:BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-    private lateinit var btAdapter:BluetoothAdapter
+    //    private var btAdapter:BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    private lateinit var btAdapter: BluetoothAdapter
     private var clientThread: ClientThread? = null
     private var commThread: CommThread? = null
     private var inputStream: InputStream? = null
     private var outputStream: OutputStream? = null
     private var socketListener: SocketListener? = null
 
+    private var mConnectedDevice: BluetoothDevice? = null
+
     init {
+        mContext = context
+
         val manager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         btAdapter = manager.adapter
+
+
     }
 
+    private val deviceScanReciver = object : BroadcastReceiver() {
+        @SuppressLint("MissingPermission")
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                val action: String? = it.action
+                when (action) {
+                    BluetoothDevice.ACTION_FOUND -> {
+                        val device: BluetoothDevice? =
+                            it.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                        device?.let { dev ->
+                            dev.uuids?.let { uuids ->
+                                Log.e(TAG, uuids.toString())
+                            }
+
+                            dev.name?.let { name ->
+                                if(name.contains("WAVU")) {
+                                    Log.e(TAG, "${name} and type is ${dev.type.toString()}")
+                                    onSearch(dev)
+                                }
+                            }
+
+                        }
+                    }
+                    else -> {
+                        Log.e(TAG, "Other State -> ACTION_FOUND 가 아님")
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    /**
+     * Bluetooth Scan
+     */
+    @SuppressLint("MissingPermission")
+    fun scanStart() {
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        mContext.registerReceiver(deviceScanReciver, filter)
+        btAdapter.startDiscovery()
+    }
+
+    fun scanStop() {
+        mContext.unregisterReceiver(deviceScanReciver)
+        forceScanStop()
+    }
+
+    @SuppressLint("MissingPermission")
+    fun forceScanStop() {
+        btAdapter.cancelDiscovery()
+    }
+
+    /**
+     * Socket Linstener 동작 호출
+     */
     fun setOnSocketListener(listener: SocketListener?) {
         socketListener = listener
     }
@@ -53,6 +123,14 @@ class BluetoothClient(context:Context) {
         socketListener?.onSend(msg)
     }
 
+    fun onSearch(device: BluetoothDevice) {
+        socketListener?.onSearch(device)
+    }
+
+    /**
+     * ************ End
+     */
+
     @SuppressLint("MissingPermission")
     fun getPairedDevices(): ArrayList<BluetoothDevice> {
         val deviceList = ArrayList<BluetoothDevice>()
@@ -74,6 +152,7 @@ class BluetoothClient(context:Context) {
         onLogPrint("Connect to server.")
         clientThread = ClientThread(device)
         clientThread?.start()
+        mConnectedDevice = device
     }
 
     fun disconnectFromServer() {
@@ -86,16 +165,22 @@ class BluetoothClient(context:Context) {
                 it.stopThread()
                 it.join(1000)
                 it.interrupt()
+
+                mConnectedDevice = null
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
+    fun getConnectedDevice(): BluetoothDevice? {
+        return mConnectedDevice
+    }
+
     fun connected(socket: BluetoothSocket?) {
         // Cancel the thread that completed the connection
         if (clientThread != null) {
-            clientThread?.stopThread()
+//            clientThread?.stopThread()
             clientThread = null
         }
 
@@ -116,44 +201,34 @@ class BluetoothClient(context:Context) {
 
     }
 
+
+
     @SuppressLint("MissingPermission")
-    inner class ClientThread(val device: BluetoothDevice) : Thread() {
+    inner class ClientThread(device: BluetoothDevice) : Thread() {
         private var socket: BluetoothSocket? = null
+        private var mDevice: BluetoothDevice? = null
 
         @SuppressLint("MissingPermission")
         override fun run() {
-//            btAdapter.cancelDiscovery()
+            btAdapter.cancelDiscovery()
 
-            for (uuid in device.uuids) {
-                try {
-                    onLogPrint("Try to connect to server..")
-                    val mmSocket: BluetoothSocket? =
-                        device.createRfcommSocketToServiceRecord(uuid.uuid)
+            try {
+                onLogPrint("Try to connect to server..")
 
-                    mmSocket?.let { thisSocket ->
-                        thisSocket.connect()
+                socket?.connect()
+            } catch (e: Exception) {
+                onError(e)
 
-                        socket = thisSocket
-                        connected(socket)
-                    }
-
-                    break
-                } catch (e: Exception) {
-                    stopThread()
-
-                    onError(e)
-
-                    e.printStackTrace()
-
-                }
+                e.printStackTrace()
+                disconnectFromServer()
             }
 
-//            if (socket != null) {
-//                onConnect()
-//
-//                commThread = CommThread(socket)
-//                commThread?.start()
-//            }
+            if (socket != null) {
+                onConnect()
+                mConnectedDevice = mDevice
+
+                connected(socket)
+            }
         }
 
         fun stopThread() {
@@ -163,9 +238,36 @@ class BluetoothClient(context:Context) {
                 e.printStackTrace()
             }
         }
+
+        @SuppressLint("MissingPermission")
+        @Throws(IOException::class)
+        private fun createBluetoothSocket(device: BluetoothDevice): BluetoothSocket? {
+            if (Build.VERSION.SDK_INT >= 10) {
+                try {
+                    val m: Method = device.javaClass.getMethod(
+                        "createInsecureRfcommSocketToServiceRecord", *arrayOf(
+                            UUID::class.java
+                        )
+                    )
+                    return m.invoke(device, BTConstant.BLUETOOTH_UUID_SPP) as BluetoothSocket?
+                } catch (e: java.lang.Exception) {
+                    Log.e(TAG, "Could not create Insecure RFComm Connection", e)
+                }
+            }
+            return device.createRfcommSocketToServiceRecord(BTConstant.BLUETOOTH_UUID_SPP)
+        }
+
+        init {
+            try {
+                socket = createBluetoothSocket(device)
+                mDevice = device
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
-    internal inner class CommThread(private val socket: BluetoothSocket?): Thread() {
+    inner class CommThread(private val socket: BluetoothSocket?) : Thread() {
 
         override fun run() {
             try {
@@ -181,20 +283,23 @@ class BluetoothClient(context:Context) {
 
             while (true) {
                 try {
-                    len = socket?.inputStream?.read(buffer)!!
-                    val data = buffer.copyOf(len)
-                    byteArrayOutputStream.write(data)
+                    socket?.inputStream?.let {
+                        len = it.read(buffer)
+                        val data = buffer.copyOf(len)
+                        byteArrayOutputStream.write(data)
 
-                    socket.inputStream?.available()?.let { available ->
+                        it.available()?.let { available ->
 
-                        if (available == 0) {
-                            val dataByteArray = byteArrayOutputStream.toByteArray()
-                            val dataString = String(dataByteArray)
-                            onReceive(dataString)
+                            if (available == 0) {
+                                val dataByteArray = byteArrayOutputStream.toByteArray()
+                                val dataString = String(dataByteArray)
+                                onReceive(dataString)
 
-                            byteArrayOutputStream.reset()
+                                byteArrayOutputStream.reset()
+                            }
                         }
                     }
+
                 } catch (e: Exception) {
                     e.printStackTrace()
                     stopThread()
@@ -219,10 +324,11 @@ class BluetoothClient(context:Context) {
 
         try {
             outputStream?.let {
-                onSend(msg)
-
                 it.write(msg.toByteArray())
                 it.flush()
+
+                onSend(msg)
+
             }
         } catch (e: Exception) {
             onError(e)
