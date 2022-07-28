@@ -71,7 +71,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/CLFindIdEmail"
+            android:id="@+id/CLFindIdInputContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
@@ -83,7 +83,7 @@
             app:layout_constraintWidth_percent="0.916666667">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/ETFindIdEmail"
+                android:id="@+id/ETFindIdInputContent"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="15dp"

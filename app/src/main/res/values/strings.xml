@@ -44,7 +44,8 @@
     <string name="str_ko_join_info_email_text">이메일</string>
     <string name="str_ko_join_info_mobile_text">휴대 전화번호</string>
 
-    <string name="str_ko_join_info_empty">입력을 확인해주세요.</string>
+    <string name="str_ko_wrong_input">입력을 확인해주세요.</string>
+
     <string name="str_ko_join_info_not_match">비밀번호가 일치하지 않습니다.</string>
 
     <string name="str_ko_login_text_err">아이디 또는 비밀번호를 확인해주세요</string>

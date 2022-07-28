@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mCBMaintain: CommonCheckBox
 
     private lateinit var mTVFindID: TextView
-    private lateinit var mTVFindPW: TextView
+//    private lateinit var mTVFindPW: TextView
     private lateinit var mTVJoin: TextView
 
     private lateinit var mETID: AppCompatEditText
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         mCBMaintain.mStrTitle = getString(R.string.str_ko_login_state_maintain)
 
         mTVFindID = findViewById(R.id.TVLoginFindID)
-        mTVFindPW = findViewById(R.id.TVLoginFindPW)
+//        mTVFindPW = findViewById(R.id.TVLoginFindPW)
         mTVJoin = findViewById(R.id.TVLoginJoin)
 
         mETID = findViewById(R.id.ETLoginID)
@@ -60,11 +60,11 @@ class LoginActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
-        mTVFindPW.setOnClickListener {
-            val intent = Intent(this@LoginActivity, FindPWActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
-        }
+//        mTVFindPW.setOnClickListener {
+//            val intent = Intent(this@LoginActivity, FindPWActivity::class.java)
+//            startActivity(intent)
+//            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+//        }
 
         mTVJoin.setOnClickListener {
             val intent = Intent(this@LoginActivity, TermsActivity::class.java)

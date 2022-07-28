@@ -22,6 +22,8 @@ class CommonTwoTabBar  : ConstraintLayout {
         fun selectSecond() { }
     }
 
+    var tabBarListener:CommonTwoTabBarListener? = null
+
     private fun getAttrs(attrs: AttributeSet?) {
     }
 
@@ -69,12 +71,14 @@ class CommonTwoTabBar  : ConstraintLayout {
         mTVFirst.setOnClickListener {
             if(mTVFirst.isSelected == false) {
                 select(TwoTabState.First)
+                tabBarListener?.selectFirst()
             }
         }
 
         mTVSecond.setOnClickListener {
             if(mTVSecond.isSelected == false) {
                 select(TwoTabState.Second)
+                tabBarListener?.selectSecond()
             }
         }
     }
@@ -95,5 +99,12 @@ class CommonTwoTabBar  : ConstraintLayout {
         }
     }
 
+    fun currentState():TwoTabState {
+        if (mTVFirst.isSelected) {
+            return TwoTabState.First
+        } else {
+            return TwoTabState.Second
+        }
+    }
 
 }

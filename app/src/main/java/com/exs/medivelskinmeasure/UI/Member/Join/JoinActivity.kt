@@ -115,7 +115,7 @@ class JoinActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
                             } else {
-                                Toast.makeText(this, getString(R.string.str_ko_join_info_empty), Toast.LENGTH_SHORT)
+                                Toast.makeText(this, getString(R.string.str_ko_wrong_input), Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
@@ -124,7 +124,7 @@ class JoinActivity : AppCompatActivity() {
 
                 }
             } else {
-                Toast.makeText(this, getString(R.string.str_ko_join_info_empty), Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.str_ko_wrong_input), Toast.LENGTH_SHORT)
                     .show()
             }
         }
