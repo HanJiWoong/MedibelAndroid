@@ -17,6 +17,11 @@ enum class TwoTabState {
 
 class CommonTwoTabBar  : ConstraintLayout {
 
+    interface CommonTwoTabBarListener {
+        fun selectFirst() { }
+        fun selectSecond() { }
+    }
+
     private fun getAttrs(attrs: AttributeSet?) {
     }
 
@@ -51,11 +56,27 @@ class CommonTwoTabBar  : ConstraintLayout {
 
         mTVFirst = view.findViewById(R.id.TVCommonTwoTabBarFirst)
         mTVSecond = view.findViewById(R.id.TVCommonTwoTabBarSecond)
+
+        setListener()
     }
 
     fun setText(first:String, second:String) {
         mTVFirst.text = first
         mTVSecond.text = second
+    }
+
+    fun setListener() {
+        mTVFirst.setOnClickListener {
+            if(mTVFirst.isSelected == false) {
+                select(TwoTabState.First)
+            }
+        }
+
+        mTVSecond.setOnClickListener {
+            if(mTVSecond.isSelected == false) {
+                select(TwoTabState.Second)
+            }
+        }
     }
 
     fun select(pos:TwoTabState) {

@@ -3,9 +3,11 @@ package com.exs.medivelskinmeasure.UI.Main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.exs.medivelskinmeasure.Constants
+import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
 import com.exs.medivelskinmeasure.MeasureMode
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.Main.Component.CommonMainTop
@@ -30,6 +32,22 @@ class MainClinicalAnimalActivity : AppCompatActivity() {
         super.onResume()
 
         Constants.measureMode = MeasureMode.AnimalClinical
+        val checkResult = MqttClient.checkMqttConnection(this)
+
+        if(checkResult) {
+            MqttClient.listener = object : MqttClient.MQTTClientInterface {
+                override fun batterState(voltage: Double, level: Double) {
+                    if(level < 2) {
+                        mViewMainTop.setBatteryState(false)
+                    } else {
+                        mViewMainTop.setBatteryState(true)
+                    }
+                }
+
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.str_ko_toast_device_connect_fail), Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun initUI() {

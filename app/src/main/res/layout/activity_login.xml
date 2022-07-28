@@ -130,32 +130,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <View
-            android:id="@+id/ViewMoreFuncDiv"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:background="@color/text_2"
-            app:layout_constraintBottom_toBottomOf="@id/TVLoginFindID"
-            app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintStart_toEndOf="@id/TVLoginFindID"
-            app:layout_constraintTop_toTopOf="@id/TVLoginFindID" />
+<!--        <View-->
+<!--            android:id="@+id/ViewMoreFuncDiv"-->
+<!--            android:layout_width="1dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:background="@color/text_2"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/TVLoginFindID"-->
+<!--            app:layout_constraintHeight_percent="0.2"-->
+<!--            app:layout_constraintStart_toEndOf="@id/TVLoginFindID"-->
+<!--            app:layout_constraintTop_toTopOf="@id/TVLoginFindID" />-->
 
-        <TextView
-            android:id="@+id/TVLoginFindPW"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/str_ko_pw_find_title"
-            android:textAlignment="center"
-            android:textColor="@color/text_2"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ViewMoreFuncDiv"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/TVLoginFindPW"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:fontFamily="@font/notosanscjkkr_regular"-->
+<!--            android:gravity="center"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:text="@string/str_ko_pw_find_title"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/text_2"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@id/ViewMoreFuncDiv"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/TVLoginJoin"
@@ -170,7 +170,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/TVLoginFindPW"
+            app:layout_constraintStart_toEndOf="@id/TVLoginFindID"
             app:layout_constraintTop_toTopOf="parent" />
 
 

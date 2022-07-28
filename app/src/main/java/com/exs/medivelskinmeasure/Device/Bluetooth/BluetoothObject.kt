@@ -1,6 +1,5 @@
-package com.exs.medivelskinmeasure.Device
+package com.exs.medivelskinmeasure.Device.Bluetooth
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
@@ -8,15 +7,8 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.nio.charset.Charset
-import java.util.*
-import java.util.logging.Handler
 
 object BluetoothObject {
 

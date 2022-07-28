@@ -145,7 +145,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:hint="@string/str_ko_join_info_pw_hint"
                 android:includeFontPadding="false"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/text_1"
                 android:textColorHint="#D7D7D7"
                 android:textSize="16sp"
@@ -178,7 +178,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:hint="@string/str_ko_join_info_pw_hint"
                 android:includeFontPadding="false"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/text_1"
                 android:textColorHint="#D7D7D7"
                 android:textSize="16sp"
@@ -189,36 +189,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/CLJoinInfoSelector"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="35dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CLJoinInfoPWMatch"
-            app:layout_constraintWidth_percent="0.9166666667"
-            app:layout_constraintDimensionRatio="h,33:2">
-
-            <com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
-                android:id="@+id/CBJoinInfoSelectorEmail"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/CBJoinInfoSelectorMobile"/>
-
-            <com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
-                android:id="@+id/CBJoinInfoSelectorMobile"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/CBJoinInfoSelectorEmail"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CLJoinInfoEmail"
@@ -229,7 +199,7 @@
             app:layout_constraintDimensionRatio="h, 33:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CLJoinInfoSelector"
+            app:layout_constraintTop_toBottomOf="@id/CLJoinInfoPWMatch"
             app:layout_constraintWidth_percent="0.916666667">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -259,11 +229,10 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_common_edit_text_bg"
-            android:visibility="gone"
             app:layout_constraintDimensionRatio="h, 33:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CLJoinInfoSelector"
+            app:layout_constraintTop_toBottomOf="@id/CLJoinInfoEmail"
             app:layout_constraintWidth_percent="0.916666667">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -292,7 +261,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_common_round_button"
-            android:enabled="true"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:includeFontPadding="false"
             android:text="@string/str_ko_join_title"

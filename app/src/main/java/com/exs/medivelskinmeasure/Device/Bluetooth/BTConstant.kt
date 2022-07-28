@@ -1,4 +1,4 @@
-package com.exs.medivelskinmeasure.Device
+package com.exs.medivelskinmeasure.Device.Bluetooth
 
 import java.util.*
 

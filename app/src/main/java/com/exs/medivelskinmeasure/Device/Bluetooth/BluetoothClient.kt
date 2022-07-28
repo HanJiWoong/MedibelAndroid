@@ -1,4 +1,4 @@
-package com.exs.medivelskinmeasure.Device
+package com.exs.medivelskinmeasure.Device.Bluetooth
 
 import android.annotation.SuppressLint
 import android.bluetooth.*

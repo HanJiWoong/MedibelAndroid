@@ -29,13 +29,10 @@ object CommonUtil {
     ) {
         when {
 
-//            hasPermissions(context,permission)
-
             ContextCompat.checkSelfPermission(
                 context,
                 permission.get(0)
             ) == PackageManager.PERMISSION_GRANTED -> {
-                // You can use the API that requires the permission.
                 performAction()
             }
 
@@ -119,5 +116,28 @@ object CommonUtil {
             context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(input.windowToken, 0)
     }
+
+    /**
+     * UUID 처리
+     */
+    fun initUUID(context:Context) {
+        val pref: SharedPreferences =
+            context.getSharedPreferences("KEY_PREF", Activity.MODE_PRIVATE)
+        var uuid:String? = pref.getString("KEY_UUID",null)
+
+        if(uuid == null) {
+            val editor: SharedPreferences.Editor = pref.edit()
+
+            uuid = UUID.randomUUID().toString()
+            editor.putString("KEY_UUID",uuid).apply()
+        }
+    }
+
+    fun getUUID(context:Context):String {
+        val pref: SharedPreferences =
+            context.getSharedPreferences("KEY_PREF", Activity.MODE_PRIVATE)
+        return pref.getString("KEY_UUID",null).toString()
+    }
+
 
 }

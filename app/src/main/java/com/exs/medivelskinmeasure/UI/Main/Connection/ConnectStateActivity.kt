@@ -6,45 +6,31 @@ import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
-import android.net.wifi.ScanResult
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.MainThread
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.exs.medivelskinmeasure.Device.BluetoothClient
-import com.exs.medivelskinmeasure.Device.BluetoothObject
-import com.exs.medivelskinmeasure.Device.SocketListener
+import com.exs.medivelskinmeasure.Device.Bluetooth.BluetoothClient
+import com.exs.medivelskinmeasure.Device.Bluetooth.BluetoothObject
+import com.exs.medivelskinmeasure.Device.Bluetooth.SocketListener
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.Main.Connection.DeviceInfoActivity
-import com.exs.medivelskinmeasure.UI.Member.Join.JoinActivity
-import com.exs.medivelskinmeasure.UI.Member.Join.TermDetailActivity
 import com.exs.medivelskinmeasure.common.CommonUtil
-import com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
-import com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
-import org.w3c.dom.Text
+
+private val REQUEST_BT_ENABLE = 100
+private val REQUEST_BT_CONNECTION = 200
 
 class ConnectStateActivity : AppCompatActivity() {
 
     private val TAG = "ConnectStateActivity"
 
-    private val REQUEST_BT_ENABLE = 100
-    private val REQUEST_BT_CONNECTION = 200
 
     private lateinit var mTitleBar: CommonTitleBar
 
@@ -193,11 +179,17 @@ class ConnectStateActivity : AppCompatActivity() {
                     mBtClient.scanStart()
 
                 }
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                if (resultCode == RESULT_CANCELED) {
+                    Toast.makeText(this, "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show()
 
-                finish()
+                    finish()
+                }
             }
+        } else if (requestCode == REQUEST_BT_CONNECTION) {
+
+            finish()
+
         }
     }
 
@@ -304,10 +296,14 @@ class ConnectStateAdapter : RecyclerView.Adapter<ConnectStateAdapter.ConnectStat
             mView.setOnClickListener {
                 Log.e("TEST", mResult!!.name)
 
-                val intent = Intent(mContext,DeviceInfoActivity::class.java)
-                intent.putExtra(mContext.getString(R.string.intent_key_bluetooth_device_info),mResult)
-                mContext.startActivity(intent)
+                val intent = Intent(mContext, DeviceInfoActivity::class.java)
+                intent.putExtra(
+                    mContext.getString(R.string.intent_key_bluetooth_device_info),
+                    mResult
+                )
+//                mContext.startActivity(intent)
 
+                (mContext as Activity).startActivityForResult(intent, REQUEST_BT_CONNECTION)
             }
 
         }

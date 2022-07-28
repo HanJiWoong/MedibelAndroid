@@ -56,24 +56,62 @@ class TermsActivity : AppCompatActivity() {
             finish()
         }
 
-        mCLServiceAgree.setOnClickListener {
-            val intent = Intent(this@TermsActivity, TermDetailActivity::class.java)
-            intent.putExtra(getString(R.string.intent_key_term_detail_type),getString(R.string.intent_data_term_service))
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+        mCBAllAgree.OnCheckBoxEvent = object : CommonCheckBox.CommonCheckBoxEvent {
+            override fun onClickCheckBox(isCheck: Boolean) {
+                mCBPersonalAgree.mIsCheck = isCheck
+                mCBServiceAgree.mIsCheck = isCheck
+
+                onCheckAgree()
+            }
+
+            override fun onClickShowTerms() {
+                mCBAllAgree.mIsCheck = !mCBAllAgree.mIsCheck
+            }
         }
 
-        mCLPersonalAgree.setOnClickListener {
-            val intent = Intent(this@TermsActivity, TermDetailActivity::class.java)
-            intent.putExtra(getString(R.string.intent_key_term_detail_type),getString(R.string.intent_data_term_personal))
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+        mCBServiceAgree.OnCheckBoxEvent = object : CommonCheckBox.CommonCheckBoxEvent {
+            override fun onClickCheckBox(isCheck: Boolean) {
+                onCheckAgree()
+            }
+
+            override fun onClickShowTerms() {
+                val intent = Intent(this@TermsActivity, TermDetailActivity::class.java)
+                intent.putExtra(getString(R.string.intent_key_term_detail_type),getString(R.string.intent_data_term_service))
+                startActivity(intent)
+                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+            }
+        }
+
+        mCBPersonalAgree.OnCheckBoxEvent = object : CommonCheckBox.CommonCheckBoxEvent {
+            override fun onClickCheckBox(isCheck: Boolean) {
+                onCheckAgree()
+            }
+
+            override fun onClickShowTerms() {
+                val intent = Intent(this@TermsActivity, TermDetailActivity::class.java)
+                intent.putExtra(getString(R.string.intent_key_term_detail_type),getString(R.string.intent_data_term_personal))
+                startActivity(intent)
+                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+            }
         }
 
         mBtnNext.setOnClickListener {
+            finish()
+
             val intent = Intent(this@TermsActivity, JoinActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
+    }
+
+    private fun onCheckAgree() {
+        if(mCBServiceAgree.mIsCheck && mCBPersonalAgree.mIsCheck) {
+           mCBAllAgree.mIsCheck = true
+        } else {
+            mCBAllAgree.mIsCheck = false
+
+        }
+
+        mBtnNext.isEnabled = mCBAllAgree.mIsCheck
     }
 }

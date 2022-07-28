@@ -90,4 +90,12 @@ class CommonMainTop : ConstraintLayout {
         mIBLogo.isEnabled = isEnable
     }
 
+    fun setBatteryState(isFull:Boolean) {
+
+        if(isFull) {
+            mIBBattery.background = mContext.getDrawable(R.drawable.ic_main_top_battery_full)
+        } else {
+            mIBBattery.background = mContext.getDrawable(R.drawable.ic_main_top_battery_low)
+        }
+    }
 }

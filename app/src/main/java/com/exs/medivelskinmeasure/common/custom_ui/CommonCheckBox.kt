@@ -11,6 +11,11 @@ import com.exs.medivelskinmeasure.R
 
 class CommonCheckBox : ConstraintLayout {
 
+    interface CommonCheckBoxEvent {
+        fun onClickCheckBox(isCheck: Boolean) {}
+        fun onClickShowTerms() {}
+    }
+
     private fun getAttrs(attrs: AttributeSet?) {
     }
 
@@ -30,20 +35,30 @@ class CommonCheckBox : ConstraintLayout {
         getAttrs(attrs)
     }
 
+    var OnCheckBoxEvent:CommonCheckBoxEvent? = null
+
     /**
      * UI
      */
 
-    private lateinit var mIVIcon:AppCompatImageView
-    private lateinit var mTVTitle:TextView
+    private lateinit var mIVIcon: AppCompatImageView
+    private lateinit var mTVTitle: TextView
 
 
-    var mStrTitle:String
+    var mStrTitle: String
         get() {
             return mTVTitle.text as String
         }
         set(value) {
             mTVTitle.text = value
+        }
+
+    var mIsCheck: Boolean
+        get() {
+            return mIVIcon.isSelected
+        }
+        set(value) {
+            mIVIcon.isSelected = value
         }
 
     private fun init(context: Context) {
@@ -53,6 +68,19 @@ class CommonCheckBox : ConstraintLayout {
 
         mIVIcon = view.findViewById(R.id.IVCommonCheckBoxIcon)
         mTVTitle = view.findViewById(R.id.TVCommonCheckBoxTitle)
+
+        mIVIcon.setOnClickListener {
+            OnCheckBoxEvent?.let {
+                mIsCheck = !mIsCheck
+                it.onClickCheckBox(mIsCheck)
+            }
+        }
+
+        mTVTitle.setOnClickListener {
+            OnCheckBoxEvent?.let {
+                it.onClickShowTerms()
+            }
+        }
     }
 
 

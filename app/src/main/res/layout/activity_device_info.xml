@@ -24,6 +24,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ViewDeviceInfoTitleBar">
 
+        <FrameLayout
+            android:id="@+id/FLTestFragment"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CLDeviceInfoChangeNameCard"
             android:layout_width="0dp"
@@ -245,7 +251,7 @@
                 android:enabled="false"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:text="@string/str_ko_connect"
+                android:text="장치 연결"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"

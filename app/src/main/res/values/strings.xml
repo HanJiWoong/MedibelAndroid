@@ -44,6 +44,11 @@
     <string name="str_ko_join_info_email_text">이메일</string>
     <string name="str_ko_join_info_mobile_text">휴대 전화번호</string>
 
+    <string name="str_ko_join_info_empty">입력을 확인해주세요.</string>
+    <string name="str_ko_join_info_not_match">비밀번호가 일치하지 않습니다.</string>
+
+    <string name="str_ko_login_text_err">아이디 또는 비밀번호를 확인해주세요</string>
+
     <string name="str_ko_Join_organization_notice_content">개인 사용자의 경우 입력하지 않아도 되며, 기관명은 수정이 어려우므로 정확히 입력해주세요.</string>
 
     <string name="str_ko_join_complete_title">회원가입 완료</string>
@@ -148,10 +153,15 @@
     <string name="intent_data_common_list_popup_type_diagnostic_name">진단명</string>
 
     <string name="intent_key_bluetooth_device_info">BluetoothDeviceInfo</string>
+    <string name="intent_key_measure_image_data">imageData</string>
 
 
+    <string name="pref_key_device_wifi_ip">DeviceWifiIP</string>
+    <string name="pref_key_device_serial">DeviceSerial</string>
+    <string name="pref_key_device_clientId">ClientId</string>
 
-
+    <string name="str_ko_toast_device_connect_fail">연결된 장치가 없습니다.</string>
+    <string name="str_ko_toast_user_info_setting_fail">유저정보 설정에 실패하였습니다.</string>
 
 
 </resources>
