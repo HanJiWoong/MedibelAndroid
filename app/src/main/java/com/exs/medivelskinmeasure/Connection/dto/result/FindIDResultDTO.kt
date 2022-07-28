@@ -13,6 +13,7 @@ data class FindIDResultDTO(
         @SerializedName("hash_token") val token:String,
         @SerializedName("nickname") val nick:String,
         @SerializedName("sign_time") val joinDate:String,
+        @SerializedName("id") val id:String,
         @SerializedName("name") val name:String,
         @SerializedName("company") val company:String
     )

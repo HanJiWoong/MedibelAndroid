@@ -85,14 +85,21 @@ class FindIDActivity : AppCompatActivity() {
                 ConnectionService.findID(findIDParams,{ result, data ->
                     runOnUiThread {
                         if(result) {
-                            val toast = Toast.makeText(this, "아이디가 확인되었습니다.", Toast.LENGTH_LONG)
-                            toast.addCallback(object: Toast.Callback() {
-                                override fun onToastHidden() {
-                                    super.onToastHidden()
-                                    finish()
-                                }
-                            })
-                            toast.show()
+
+                            data?.memberList?.let {
+                                val memberData = it.get(0)
+
+                                val toast = Toast.makeText(this, "아이디 ${memberData.id}가 확인되었습니다.", Toast.LENGTH_LONG)
+                                toast.addCallback(object: Toast.Callback() {
+                                    override fun onToastHidden() {
+                                        super.onToastHidden()
+                                        finish()
+                                    }
+                                })
+                                toast.show()
+                            }
+
+
 
                         } else {
                             Toast.makeText(this, getString(R.string.str_ko_wrong_input), Toast.LENGTH_SHORT)
