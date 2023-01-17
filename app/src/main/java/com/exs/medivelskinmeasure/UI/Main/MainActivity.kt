@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         setCommonListener()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        MqttClient.disconnectMqtt()
+    }
+
     override fun onResume() {
         super.onResume()
 

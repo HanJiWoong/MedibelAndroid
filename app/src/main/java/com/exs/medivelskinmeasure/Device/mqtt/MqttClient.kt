@@ -1,5 +1,6 @@
 package com.exs.medivelskinmeasure.Device.mqtt
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.exs.medivelskinmeasure.R
@@ -44,14 +45,9 @@ object MqttClient {
 
             } else {
                 try {
-
-
-                    _mqttClient!!.connect()
-                    setConnectionToken()
-
-                    return true
+                    return tryConnection(context)
                 } catch (e: MqttException) {
-
+                    resetConnectionData(context)
                     e.printStackTrace()
 
                     return false
@@ -59,49 +55,53 @@ object MqttClient {
             }
 
         } else {
-            val deviceIp = CommonUtil.getPreferenceString(
-                context,
-                context.getString(R.string.pref_key_device_wifi_ip)
-            )
+            return tryConnection(context)
+        }
+    }
 
-            val deviceSerial = CommonUtil.getPreferenceString(
-                context,
-                context.getString(R.string.pref_key_device_serial)
-            )
+    private fun tryConnection(context: Context): Boolean {
+        val deviceIp = CommonUtil.getPreferenceString(
+            context,
+            context.getString(R.string.pref_key_device_wifi_ip)
+        )
 
-            Log.e(TAG, "ip : ${deviceIp} and Serial : ${deviceSerial}")
+        val deviceSerial = CommonUtil.getPreferenceString(
+            context,
+            context.getString(R.string.pref_key_device_serial)
+        )
 
-            _deviceSerial = deviceSerial
+        Log.e(TAG, "ip : ${deviceIp} and Serial : ${deviceSerial}")
 
-            if (deviceSerial != null && deviceIp != null) {
-                if (deviceIp.isEmpty() || deviceSerial.isEmpty()) {
-                    return false
-                } else {
-                    try {
-                        val tempClient = MqttAndroidClient(
-                            context,
-                            "tcp://${deviceIp}:1883",
-                            CommonUtil.getPreferenceString(
-                                context,
-                                context.getString(R.string.pref_key_device_clientId)
-                            )
-                        )
+        _deviceSerial = deviceSerial
 
-                        _mqttClient = tempClient
-                        setConnectionToken()
-
-                        return true
-                    } catch (e: MqttException) {
-                        resetConnectionData(context)
-
-                        Log.d(TAG, e.localizedMessage)
-                        e.printStackTrace()
-                        return false
-                    }
-                }
-            } else {
+        if (deviceSerial != null && deviceIp != null) {
+            if (deviceIp.isEmpty() || deviceSerial.isEmpty()) {
                 return false
+            } else {
+                try {
+                    val tempClient = MqttAndroidClient(
+                        context,
+                        "tcp://${deviceIp}:1883",
+                        CommonUtil.getPreferenceString(
+                            context,
+                            context.getString(R.string.pref_key_device_clientId)
+                        )
+                    )
+
+                    _mqttClient = tempClient
+                    setConnectionToken()
+
+                    return true
+                } catch (e: MqttException) {
+                    resetConnectionData(context)
+
+                    Log.d(TAG, e.localizedMessage)
+                    e.printStackTrace()
+                    return false
+                }
             }
+        } else {
+            return false
         }
     }
 
@@ -120,6 +120,7 @@ object MqttClient {
                 exception: Throwable
             ) {
                 Log.w("Mqtt", "Subscribed fail!")
+                disconnectMqtt()
                 subscribeTopic()
             }
         }
@@ -139,6 +140,13 @@ object MqttClient {
             context.getString(R.string.pref_key_device_serial),
             ""
         )
+
+        disconnectMqtt()
+    }
+
+    fun disconnectMqtt() {
+        _mqttClient?.disconnect()
+        _mqttClient = null
     }
 
     fun existConnectionData(context: Context): Boolean {

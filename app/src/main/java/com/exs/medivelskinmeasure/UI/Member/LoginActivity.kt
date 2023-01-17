@@ -23,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mCBMaintain: CommonCheckBox
 
     private lateinit var mTVFindID: TextView
-//    private lateinit var mTVFindPW: TextView
+
+    //    private lateinit var mTVFindPW: TextView
     private lateinit var mTVJoin: TextView
 
     private lateinit var mETID: AppCompatEditText
@@ -74,37 +75,39 @@ class LoginActivity : AppCompatActivity() {
 
         mBtnLogin.setOnClickListener {
 
-            if (!mETID.text!!.isEmpty() &&
-                !mETPW.text!!.isEmpty()
-            ) {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
 
-
-                val loginParams = LoginRequestDTO(
-                    userId = mETID.text.toString(),
-                    password = mETPW.text.toString()
-                )
-
-                ConnectionService.login(mETID.text.toString(),mETPW.text.toString(), { result, data ->
-                    runOnUiThread {
-                        if (result) {
-                            finish()
-
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
-
-                        } else {
-                            Toast.makeText(
-                                this,
-                                getString(R.string.str_ko_login_text_err),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                })
-
-
-            }
+//            if (!mETID.text!!.isEmpty() &&
+//                !mETPW.text!!.isEmpty()
+//            ) {
+//
+//
+//                val loginParams = LoginRequestDTO(
+//                    userId = mETID.text.toString(),
+//                    password = mETPW.text.toString()
+//                )
+//
+//                ConnectionService.login(mETID.text.toString(),mETPW.text.toString(), { result, data ->
+//                    runOnUiThread {
+//                        if (result) {
+//                            finish()
+//
+//                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                            startActivity(intent)
+//                            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+//
+//                        } else {
+//                            Toast.makeText(
+//                                this,
+//                                getString(R.string.str_ko_login_text_err),
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                    }
+//                })
+//            }
         }
     }
 }
