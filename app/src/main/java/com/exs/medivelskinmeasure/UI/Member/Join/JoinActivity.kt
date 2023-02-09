@@ -80,7 +80,6 @@ class JoinActivity : AppCompatActivity() {
         mBtnJoin.setOnClickListener {
 
             if (!mETName.text!!.isEmpty() &&
-                !mETOrganization.text!!.isEmpty() &&
                 !mETID.text!!.isEmpty() &&
                 !mETPW.text!!.isEmpty() &&
                 !mETPWConfirm.text!!.isEmpty() &&

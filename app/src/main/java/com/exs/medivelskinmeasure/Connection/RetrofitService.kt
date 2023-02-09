@@ -10,7 +10,7 @@ import retrofit2.http.*
 
 interface RetrofitService {
     // 회원 가입
-    @POST("signup")
+    @PUT("user/signup")
     fun memberSignup(
         @Body parameters:SignupRequestDTO
     ): Call<LoginResultDTO>
@@ -21,7 +21,7 @@ interface RetrofitService {
 //        @Body Parameters:LoginRequestDTO
 //    ): Call<LoginResultDTO>
 
-    @GET("login")
+    @GET("user/signin")
     fun memberLogin(
         @Query("id") id:String,
         @Query("password") pw:String
@@ -29,9 +29,10 @@ interface RetrofitService {
 
 
     // 아이디찾기
-    @POST("find_id")
+    @GET("user/find_id")
     fun findID(
-        @Body parameters: FindIDRequestDTO
+        @Query("email") email:String?,
+        @Query("phone_no") phone_no:String?
     ):Call<FindIDResultDTO>
 
 

@@ -15,36 +15,38 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ConnectionService {
     private val TAG: String = "ConnectionService"
 
-    private val mServerUrl:String = "http://3.39.48.213:5000/"
+    //    private val mServerUrl:String = "http://3.39.48.213:5000/"
+    private val mServerUrl: String = "https://wavu-api.medivelbio.com/"
 
     private lateinit var mRetrofit: Retrofit
-    private lateinit var mService:RetrofitService
+    private lateinit var mService: RetrofitService
 
 
     init {
-        mRetrofit = Retrofit.Builder().baseUrl(mServerUrl).addConverterFactory(GsonConverterFactory.create()).build()
+        mRetrofit = Retrofit.Builder().baseUrl(mServerUrl)
+            .addConverterFactory(GsonConverterFactory.create()).build()
         mService = mRetrofit.create(RetrofitService::class.java)
     }
 
-    fun signUp(params:SignupRequestDTO,result:(result:Boolean,data:LoginResultDTO?)->Unit) {
+    fun signUp(params: SignupRequestDTO, result: (result: Boolean, data: LoginResultDTO?) -> Unit) {
         mService.memberSignup(params).enqueue(object : Callback<LoginResultDTO> {
             override fun onResponse(
                 call: Call<LoginResultDTO>,
                 response: Response<LoginResultDTO>
             ) {
-                if(response.code() == 200) {
-                    if(response.body()!!.code == 200) {
+                if (response.code() == 200) {
+                    if (response.body()!!.code == 200) {
                         result(true, response.body())
                     } else {
-                        result(false,null)
+                        result(false, null)
                     }
                 } else {
-                    result(false,null)
+                    result(false, null)
                 }
             }
 
             override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
-                result(false,null)
+                result(false, null)
             }
         })
     }
@@ -72,48 +74,51 @@ object ConnectionService {
 //        })
 //    }
 
-    fun login(id:String, pw:String, result:(result:Boolean, data:LoginResultDTO?)->Unit) {
-        mService.memberLogin(id,pw).enqueue(object:Callback<LoginResultDTO> {
+    fun login(id: String, pw: String, result: (result: Boolean, data: LoginResultDTO?) -> Unit) {
+        mService.memberLogin(id, pw).enqueue(object : Callback<LoginResultDTO> {
             override fun onResponse(
                 call: Call<LoginResultDTO>,
                 response: Response<LoginResultDTO>
             ) {
-                if(response.code() == 200) {
-                    if(response.body()!!.code == 200) {
+                if (response.code() == 200) {
+                    if (response.body()!!.code == 200) {
                         result(true, response.body())
                     } else {
-                        result(false,null)
+                        result(false, null)
                     }
                 } else {
-                    result(false,null)
+                    result(false, null)
                 }
             }
 
             override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
-                result(false,null)
+                result(false, null)
             }
         })
     }
 
-    fun findID(params:FindIDRequestDTO, result:(result:Boolean, data:FindIDResultDTO?) -> Unit) {
-        mService.findID(params).enqueue(object:Callback<FindIDResultDTO>{
+    fun findID(
+        params: FindIDRequestDTO,
+        result: (result: Boolean, data: FindIDResultDTO?) -> Unit
+    ) {
+        mService.findID(params.memberEmail,params.memberMobile).enqueue(object : Callback<FindIDResultDTO> {
             override fun onResponse(
                 call: Call<FindIDResultDTO>,
                 response: Response<FindIDResultDTO>
             ) {
-                if(response.code() == 200) {
-                    if(response.body()!!.code == 200) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
                         result(true, response.body())
                     } else {
-                        result(false,null)
+                        result(false, null)
                     }
                 } else {
-                    result(false,null)
+                    result(false, null)
                 }
             }
 
             override fun onFailure(call: Call<FindIDResultDTO>, t: Throwable) {
-                result(false,null)
+                result(false, null)
             }
 
         })

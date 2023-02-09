@@ -4,17 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class FindIDResultDTO(
     @SerializedName("code") val code:Int,
-    @SerializedName("id") val memberList:ArrayList<FindIDContentDTO>
+    @SerializedName("data") val data:FindIDDataDTO
 ) {
-    data class FindIDContentDTO(
-        @SerializedName("admin_flag") val admin:Int,
-        @SerializedName("capture_count") val captureCnt:Int,
-        @SerializedName("e_mail") val email:String,
-        @SerializedName("hash_token") val token:String,
-        @SerializedName("nickname") val nick:String,
-        @SerializedName("sign_time") val joinDate:String,
-        @SerializedName("id") val id:String,
-        @SerializedName("name") val name:String,
-        @SerializedName("company") val company:String
-    )
+    data class FindIDDataDTO(
+        @SerializedName("Success") val success:Boolean,
+        @SerializedName("Message") val Message:String,
+        @SerializedName("data") val content:FindIDContentDTO
+    ) {
+        data class FindIDContentDTO(
+            @SerializedName("id") val memberId:String
+        )
+    }
 }

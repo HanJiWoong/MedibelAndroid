@@ -75,39 +75,38 @@ class LoginActivity : AppCompatActivity() {
 
         mBtnLogin.setOnClickListener {
 
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            startActivity(intent)
+//            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
 
-//            if (!mETID.text!!.isEmpty() &&
-//                !mETPW.text!!.isEmpty()
-//            ) {
-//
-//
-//                val loginParams = LoginRequestDTO(
-//                    userId = mETID.text.toString(),
-//                    password = mETPW.text.toString()
-//                )
-//
-//                ConnectionService.login(mETID.text.toString(),mETPW.text.toString(), { result, data ->
-//                    runOnUiThread {
-//                        if (result) {
-//                            finish()
-//
-//                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                            startActivity(intent)
-//                            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
-//
-//                        } else {
-//                            Toast.makeText(
-//                                this,
-//                                getString(R.string.str_ko_login_text_err),
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    }
-//                })
-//            }
+            if (!mETID.text!!.isEmpty() &&
+                !mETPW.text!!.isEmpty()
+            ) {
+
+                val loginParams = LoginRequestDTO(
+                    userId = mETID.text.toString(),
+                    password = mETPW.text.toString()
+                )
+
+                ConnectionService.login(mETID.text.toString(),mETPW.text.toString(), { result, data ->
+                    runOnUiThread {
+                        if (result) {
+                            finish()
+
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+
+                        } else {
+                            Toast.makeText(
+                                this,
+                                getString(R.string.str_ko_login_text_err),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                })
+            }
         }
     }
 }
