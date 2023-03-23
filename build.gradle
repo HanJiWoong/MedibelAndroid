@@ -11,7 +11,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
     }
-
 }
 
 task clean(type: Delete) {
