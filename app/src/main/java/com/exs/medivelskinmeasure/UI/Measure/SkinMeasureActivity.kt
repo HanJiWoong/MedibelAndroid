@@ -3,6 +3,7 @@ package com.exs.medivelskinmeasure.UI.Measure
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -10,13 +11,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.exs.medivelskinmeasure.Device.mqtt.MQTTMeasuredResultData
 import com.exs.medivelskinmeasure.Device.mqtt.MQTTMeasuringRequest
 import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
 import com.exs.medivelskinmeasure.Device.mqtt.MqttDataStep
 import com.exs.medivelskinmeasure.R
+import com.exs.medivelskinmeasure.common.CommonUtil
+import com.exs.medivelskinmeasure.common.CommonUtil.setPreferenceString
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
+import org.videolan.libvlc.LibVLC
+import org.videolan.libvlc.Media
+import org.videolan.libvlc.MediaPlayer
+import org.videolan.libvlc.util.VLCVideoLayout
 
 class SkinMeasureActivity : AppCompatActivity() {
 
@@ -25,6 +31,10 @@ class SkinMeasureActivity : AppCompatActivity() {
     private lateinit var mCLProgressContent: ConstraintLayout
     private lateinit var mTVSkinMeasureInfo: TextView
     private lateinit var mTVSkinMeasureDesc: TextView
+
+    private lateinit var mVLCVideoLayout: VLCVideoLayout
+    private lateinit var libVlc: LibVLC
+    private lateinit var mediaPlayer: MediaPlayer
 
     private lateinit var mBtnMeasure: AppCompatButton
 
@@ -35,10 +45,19 @@ class SkinMeasureActivity : AppCompatActivity() {
         setContentView(R.layout.activity_skin_measure)
 
         initUI()
+        initPlayer()
         setCommonListener()
 
         MqttClient.requestMeasureStart()
         registMQTTCallback()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        CommonUtil.getPreferenceString(this, getString(R.string.pref_key_device_wifi_ip))?.let {
+            startPlayer(it)
+        }
     }
 
     private fun initUI() {
@@ -61,9 +80,42 @@ class SkinMeasureActivity : AppCompatActivity() {
 
         mTVSkinMeasureInfo = findViewById(R.id.TVSkinMeasureInfo)
         mTVSkinMeasureDesc = findViewById(R.id.TVSkinMeasureInfoDesc)
+        mVLCVideoLayout = findViewById(R.id.VLSkinMeasure)
 
         mBtnMeasure = findViewById(R.id.BtnSkinMeasure)
 
+    }
+
+    private fun initPlayer() {
+        libVlc = LibVLC(this, ArrayList<String>().apply {
+//            add("--no-drop-late-frames")
+//            add("--no-skip-frames")
+            add("--drop-late-frames")
+            add("--skip-frames")
+            add("--rtsp-tcp")
+            add("-vvv")
+        })
+        mediaPlayer = MediaPlayer(libVlc)
+        mediaPlayer.attachViews(mVLCVideoLayout, null, false, false)
+        mediaPlayer.setEventListener { event ->
+            when (event.type) {
+                MediaPlayer.Event.Playing -> {
+                }
+                MediaPlayer.Event.Stopped -> {
+                }
+            }
+        }
+    }
+
+    private fun startPlayer(url: String) {
+        Media(libVlc, Uri.parse(url)).apply {
+            setHWDecoderEnabled(true, false)
+            addOption(":network-caching=0")
+            addOption(":clock-jitter=0")
+            addOption(":clock-synchro=0")
+            mediaPlayer.media = this
+        }.release()
+        mediaPlayer.play()
     }
 
     private fun setCommonListener() {
