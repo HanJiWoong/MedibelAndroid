@@ -121,6 +121,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/BtnJoinInfoIDDup"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#00000000"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:text="중복확인"
+                android:textColor="@color/main_concept"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w,86:50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

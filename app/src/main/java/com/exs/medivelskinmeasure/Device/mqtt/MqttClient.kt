@@ -7,13 +7,17 @@ import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.common.CommonUtil
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import org.eclipse.paho.android.service.MqttAndroidClient
+import info.mqtt.android.service.Ack
+import info.mqtt.android.service.MqttAndroidClient
+import kotlinx.coroutines.*
+//import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
-import org.eclipse.paho.client.mqttv3.MqttClient
+
+//import org.eclipse.paho.android.service.MqttAndroidClient
+
+
+
+
 
 object MqttClient {
     private val TAG: String = "MqttClient"
@@ -40,7 +44,7 @@ object MqttClient {
     fun checkMqttConnection(context: Context): Boolean {
         if (_mqttClient != null) {
             if (_mqttClient!!.isConnected) {
-                setConnectionToken()
+                setConnectionToken(context)
                 return true
 
             } else {
@@ -85,11 +89,12 @@ object MqttClient {
                         CommonUtil.getPreferenceString(
                             context,
                             context.getString(R.string.pref_key_device_clientId)
-                        )
+                        )!!
+                        , Ack.MANUAL_ACK
                     )
 
                     _mqttClient = tempClient
-                    setConnectionToken()
+                    setConnectionToken(context)
 
                     return true
                 } catch (e: MqttException) {
@@ -105,13 +110,17 @@ object MqttClient {
         }
     }
 
-    fun setConnectionToken() {
+    fun setConnectionToken(context:Context) {
         val token = _mqttClient!!.connect()
+
         token.actionCallback = object : IMqttActionListener {
             override fun onSuccess(asyncActionToken: IMqttToken) {
                 Log.w("Mqtt", "Subscribed!")
 
                 subscribeTopic()
+
+                CommonUtil.setPreferenceString(context, context.getString(R.string.pref_key_device_wifi_ip), "")
+                CommonUtil.setPreferenceString(context, context.getString(R.string.pref_key_device_serial), "")
 
             }
 
@@ -179,14 +188,28 @@ object MqttClient {
                 val topic: String =
                     String.format(MQTTTopic.MQTTTopicReportRequest, _deviceSerial)
 
-                client.subscribe(topic, 0)
+
+                val runnable = Runnable {
+                    client.subscribe(topic, 0)
+                }
+
+                runnable.run()
+
             }
 
             // 컨트롤 응답
             _mqttClient?.let { client ->
                 val topic: String = String.format(MQTTTopic.MQTTTopicControlResponse, _deviceSerial)
 
-                client.subscribe(topic, 0)
+//                withContext(Dispatchers.IO) {
+//
+//                }
+
+                val runnable = Runnable {
+                    client.subscribe(topic, 0)
+                }
+
+                runnable.run()
             }
 
         } catch (e: MqttException) {
@@ -329,11 +352,15 @@ object MqttClient {
         CoroutineScope(Dispatchers.IO).async {
             try {
                 _mqttClient?.let { client ->
+                    mResultImgArray.clear()
+
                     val topic: String =
                         String.format(MQTTTopic.MQTTTopicControlRequest, _deviceSerial)
 
                     val param = MQTTMeasureRequestParam(MQTTString.StepImage)
                     val request = MQTTMeasureRequest(MQTTString.Measure, param)
+
+
 
                     client.publish(
                         topic, MqttMessage(

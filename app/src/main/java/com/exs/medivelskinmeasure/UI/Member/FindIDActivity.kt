@@ -55,7 +55,6 @@ class FindIDActivity : AppCompatActivity() {
         mBtnFind = findViewById(R.id.BtnFindID)
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
     private fun setCommonListener() {
         mTitleBar.setOnClickBackListener {
             finish()
@@ -74,7 +73,7 @@ class FindIDActivity : AppCompatActivity() {
         mBtnFind.setOnClickListener {
             if (mETContent.text?.isEmpty() == false) {
                 val findIDParams = FindIDRequestDTO(
-//                    memberName = mETName.text.toString(),
+                    memberName = mETName.text.toString(),
                     memberEmail = null,
                     memberMobile = null
                 )
@@ -91,18 +90,25 @@ class FindIDActivity : AppCompatActivity() {
                             data?.data?.let {
                                 val memberData = it.content
 
-                                val toast = Toast.makeText(
-                                    this,
-                                    "아이디 ${memberData.memberId}가 확인되었습니다.",
-                                    Toast.LENGTH_LONG
-                                )
-                                toast.addCallback(object : Toast.Callback() {
-                                    override fun onToastHidden() {
-                                        super.onToastHidden()
-                                        finish()
-                                    }
-                                })
-                                toast.show()
+                                val intent = Intent(this@FindIDActivity, FindIDResultActivity::class.java)
+                                intent.putExtra(getString(R.string.intent_key_find_id_name),memberData.memberName)
+                                intent.putExtra(getString(R.string.intent_key_find_id_id),memberData.memberId)
+                                startActivity(intent)
+                                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+
+                                finish()
+//                                val toast = Toast.makeText(
+//                                    this,
+//                                    "아이디 ${memberData.memberId}가 확인되었습니다.",
+//                                    Toast.LENGTH_LONG
+//                                )
+//                                toast.addCallback(object : Toast.Callback() {
+//                                    override fun onToastHidden() {
+//                                        super.onToastHidden()
+//                                        finish()
+//                                    }
+//                                })
+//                                toast.show()
                             }
                         } else {
                             Toast.makeText(

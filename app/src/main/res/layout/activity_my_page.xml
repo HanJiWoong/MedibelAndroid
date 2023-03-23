@@ -42,7 +42,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:text="ABCD1234"
+                android:text=""
                 android:textColor="#4a545a"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

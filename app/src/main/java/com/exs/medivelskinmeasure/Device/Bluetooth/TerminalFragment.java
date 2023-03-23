@@ -315,18 +315,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             /**
              * 결과 확인
              */
-            if(msg.charAt(5) == '0' && msg.charAt(6) == '0') {
+            if (msg.charAt(5) == '0' && msg.charAt(6) == '0') {
 
                 String[] msgSplit = msg.split("00");
 
-                if(msgSplit.length >= 2) {
-                    CommonUtil.INSTANCE.setPreferenceString(getActivity(),mActivity.getString(R.string.pref_key_device_wifi_ip),msgSplit[1]);
+                if (msgSplit.length >= 2) {
+                    CommonUtil.INSTANCE.setPreferenceString(getActivity(), mActivity.getString(R.string.pref_key_device_wifi_ip), msgSplit[1]);
                 }
 
                 String[] nameSplit = deviceName.split("WAVU-");
 
-                if(nameSplit.length >= 2) {
-                    CommonUtil.INSTANCE.setPreferenceString(getActivity(),mActivity.getString(R.string.pref_key_device_serial),nameSplit[1]);
+                if (nameSplit.length >= 2) {
+                    CommonUtil.INSTANCE.setPreferenceString(getActivity(), mActivity.getString(R.string.pref_key_device_serial), nameSplit[1]);
                 }
 
                 mActivity.runOnUiThread(new Runnable() {
@@ -378,7 +378,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 send(sendText.getText().toString());
+
             }
         });
 

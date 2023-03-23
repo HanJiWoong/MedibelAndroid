@@ -12,7 +12,8 @@ data class FindIDResultDTO(
         @SerializedName("data") val content:FindIDContentDTO
     ) {
         data class FindIDContentDTO(
-            @SerializedName("id") val memberId:String
+            @SerializedName("id") val memberId:String,
+            @SerializedName("name") val memberName:String
         )
     }
 }

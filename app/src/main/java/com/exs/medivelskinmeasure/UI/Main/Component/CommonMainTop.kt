@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -48,6 +49,8 @@ class CommonMainTop : ConstraintLayout {
     private lateinit var mIBMyPage:AppCompatImageButton
 
 
+    var logoutLauncher:ActivityResultLauncher<Intent>? = null
+
     private fun init(context: Context) {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.view_common_main_top, this, false)
@@ -80,7 +83,8 @@ class CommonMainTop : ConstraintLayout {
 
         mIBMyPage.setOnClickListener {
             val intent = Intent(mContext, MyPageActivity::class.java)
-            (mContext as AppCompatActivity).startActivity(intent)
+//            (mContext as AppCompatActivity).startActivity(intent)
+            logoutLauncher?.launch(intent)
             (mContext as AppCompatActivity).overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 

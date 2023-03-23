@@ -3,6 +3,7 @@ package com.exs.medivelskinmeasure.UI.Main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import com.exs.medivelskinmeasure.Constants
@@ -10,6 +11,9 @@ import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
 import com.exs.medivelskinmeasure.MeasureMode
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.Main.Component.CommonMainTop
+import com.exs.medivelskinmeasure.UI.Member.LoginActivity
+import com.exs.medivelskinmeasure.UI.MyPage.LogoutRequestCode
+import com.exs.medivelskinmeasure.UI.MyPage.MyPageActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -96,6 +100,16 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
+        mViewMainTop.logoutLauncher = registerForActivityResult(StartActivityForResult()) {
+            if(it.resultCode == LogoutRequestCode) {
+                finish()
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+            }
+        }
 
     }
+
+
 }

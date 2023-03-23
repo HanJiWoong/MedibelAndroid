@@ -30,7 +30,7 @@ class JoinActivity : AppCompatActivity() {
     private lateinit var mETEmail: AppCompatEditText
     private lateinit var mETMobile: AppCompatEditText
 
-
+    private lateinit var mBtnDup: AppCompatButton
     private lateinit var mBtnJoin: AppCompatButton
 
     private var mIsShowOrganizationNotice: Boolean = false
@@ -55,6 +55,7 @@ class JoinActivity : AppCompatActivity() {
         mETEmail = findViewById(R.id.ETJoinInfoEmail)
         mETMobile = findViewById(R.id.ETJoinInfoMobile)
 
+        mBtnDup = findViewById(R.id.BtnJoinInfoIDDup)
         mBtnJoin = findViewById(R.id.BtnJoin)
     }
 
@@ -74,6 +75,26 @@ class JoinActivity : AppCompatActivity() {
                 )
                 startActivity(intent)
                 overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+            }
+        }
+
+        mBtnDup.setOnClickListener {
+            if(!mETID.text!!.isEmpty()) {
+                ConnectionService.checkDuplicationID(mETID.text.toString(), { result, data ->
+                    runOnUiThread {
+                        if(result) {
+                            Toast.makeText(this, "아이디 사용이 가능합니다.", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            Toast.makeText(this, getString(R.string.str_ko_wrong_input), Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+                })
+            } else {
+                Toast.makeText(this, getString(R.string.str_ko_wrong_input), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 

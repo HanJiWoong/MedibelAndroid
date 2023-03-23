@@ -2,10 +2,10 @@ package com.exs.medivelskinmeasure.Connection
 
 import android.util.Log
 import com.exs.medivelskinmeasure.Connection.dto.request.FindIDRequestDTO
+import com.exs.medivelskinmeasure.Connection.dto.request.FindPWRequestDTO
 import com.exs.medivelskinmeasure.Connection.dto.request.LoginRequestDTO
 import com.exs.medivelskinmeasure.Connection.dto.request.SignupRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.result.FindIDResultDTO
-import com.exs.medivelskinmeasure.Connection.dto.result.LoginResultDTO
+import com.exs.medivelskinmeasure.Connection.dto.result.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -97,14 +97,65 @@ object ConnectionService {
         })
     }
 
+    fun autoLogin(token: String, result: (result: Boolean, data: LoginResultDTO?) -> Unit) {
+        mService.memberAutoLogin(token).enqueue(object : Callback<LoginResultDTO> {
+            override fun onResponse(
+                call: Call<LoginResultDTO>,
+                response: Response<LoginResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.code == 200) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+        })
+    }
+
     fun findID(
         params: FindIDRequestDTO,
         result: (result: Boolean, data: FindIDResultDTO?) -> Unit
     ) {
-        mService.findID(params.memberEmail,params.memberMobile).enqueue(object : Callback<FindIDResultDTO> {
+        mService.findID(params.memberName, params.memberEmail, params.memberMobile)
+            .enqueue(object : Callback<FindIDResultDTO> {
+                override fun onResponse(
+                    call: Call<FindIDResultDTO>,
+                    response: Response<FindIDResultDTO>
+                ) {
+                    if (response.code() == 200) {
+                        if (response.body()!!.data.success) {
+                            result(true, response.body())
+                        } else {
+                            result(false, null)
+                        }
+                    } else {
+                        result(false, null)
+                    }
+                }
+
+                override fun onFailure(call: Call<FindIDResultDTO>, t: Throwable) {
+                    result(false, null)
+                }
+
+            })
+    }
+
+    fun findPW(
+        params: FindPWRequestDTO,
+        result: (result: Boolean, data: FindPWResultDTO?) -> Unit
+    ) {
+        mService.findPW(params).enqueue(object : Callback<FindPWResultDTO> {
             override fun onResponse(
-                call: Call<FindIDResultDTO>,
-                response: Response<FindIDResultDTO>
+                call: Call<FindPWResultDTO>,
+                response: Response<FindPWResultDTO>
             ) {
                 if (response.code() == 200) {
                     if (response.body()!!.data.success) {
@@ -117,11 +168,58 @@ object ConnectionService {
                 }
             }
 
-            override fun onFailure(call: Call<FindIDResultDTO>, t: Throwable) {
+            override fun onFailure(call: Call<FindPWResultDTO>, t: Throwable) {
                 result(false, null)
             }
-
         })
     }
 
+    fun checkDuplicationID(
+        memberId: String,
+        result: (result: Boolean, data: CheckDupIDResultDTO?) -> Unit
+    ) {
+        mService.checkDupID(memberId).enqueue(object : Callback<CheckDupIDResultDTO> {
+            override fun onResponse(
+                call: Call<CheckDupIDResultDTO>,
+                response: Response<CheckDupIDResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<CheckDupIDResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+        })
+    }
+
+    fun getUserInfo(token: String, result: (result: Boolean, data: UserInfoResultDTO?) -> Unit) {
+        mService.userInfo(token).enqueue(object : Callback<UserInfoResultDTO> {
+            override fun onResponse(
+                call: Call<UserInfoResultDTO>,
+                response: Response<UserInfoResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<UserInfoResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+        })
+    }
 }

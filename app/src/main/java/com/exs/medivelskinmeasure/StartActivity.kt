@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
 import com.exs.medivelskinmeasure.Connection.ConnectionService
+import com.exs.medivelskinmeasure.UI.Main.MainActivity
 import com.exs.medivelskinmeasure.UI.Member.LoginActivity
 import com.exs.medivelskinmeasure.common.CommonUtil
 import kotlinx.coroutines.*
@@ -32,11 +33,73 @@ class StartActivity : AppCompatActivity() {
         }
 
         GlobalScope.launch() {
-            delay(2000)
+            delay(1000)
 
-            val intent = Intent(this@StartActivity, LoginActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+
+            val autoLogin = CommonUtil.getPreferenceString(
+                this@StartActivity,
+                getString(R.string.pref_key_is_auto_login)
+            )
+
+            if (autoLogin.equals("false")) {
+                val intent = Intent(this@StartActivity, LoginActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+                finish()
+            } else {
+
+                val token = CommonUtil.getPreferenceString(
+                    this@StartActivity,
+                    getString(R.string.pref_key_auto_login_token)
+                )
+
+                if (token == null) {
+
+                    val intent = Intent(this@StartActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+                    finish()
+                } else {
+                    if (token.isEmpty()) {
+                        val intent = Intent(this@StartActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+                        finish()
+                    } else {
+                        ConnectionService.autoLogin(token, { result, data ->
+                            if (result) {
+
+
+                                CommonUtil.setPreferenceString(
+                                    this@StartActivity,
+                                    getString(R.string.pref_key_auto_login_token),
+                                    data?.data?.content?.token ?: ""
+                                )
+
+
+                                val intent = Intent(this@StartActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                overridePendingTransition(
+                                    R.anim.anim_fade_in,
+                                    R.anim.anim_do_not_move
+                                )
+                                finish()
+                            } else {
+
+                                val intent = Intent(this@StartActivity, LoginActivity::class.java)
+                                startActivity(intent)
+                                overridePendingTransition(
+                                    R.anim.anim_fade_in,
+                                    R.anim.anim_do_not_move
+                                )
+                                finish()
+                            }
+                        })
+                    }
+                }
+            }
+
+
         }
 
     }
