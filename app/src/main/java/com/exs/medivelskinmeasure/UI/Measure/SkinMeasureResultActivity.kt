@@ -1,16 +1,24 @@
 package com.exs.medivelskinmeasure.UI.Measure
 
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Base64
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.app.ActivityCompat
 import com.exs.medivelskinmeasure.Constants
 import com.exs.medivelskinmeasure.Device.mqtt.MQTTMeasuredResultData
 import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
@@ -24,6 +32,10 @@ import com.exs.medivelskinmeasure.UI.Main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 class SkinMeasureResultActivity : AppCompatActivity() {
 
@@ -55,10 +67,11 @@ class SkinMeasureResultActivity : AppCompatActivity() {
                 for (data in dataArr) {
 
 //                    val imgData: ByteArray = BitmapFactory.decodeStream(.byteInputStream())
-                    val imgBytes = Base64.decode(data.image_data,0)
+                    val imgBytes = Base64.decode(data.image_data, 0)
                     val bitmap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
 
                     mArrResultImg.add(bitmap)
+
                 }
             }
 
@@ -151,7 +164,7 @@ class SkinMeasureResultActivity : AppCompatActivity() {
     private fun showImage() {
         if (mArrResultImg.size > 0) {
             mImageView.setImageBitmap(mArrResultImg.get(mArrIter))
-            mTVCount.setText("(${mArrIter+1}/${mArrResultImg.count()})")
+            mTVCount.setText("(${mArrIter + 1}/${mArrResultImg.count()})")
         }
     }
 }

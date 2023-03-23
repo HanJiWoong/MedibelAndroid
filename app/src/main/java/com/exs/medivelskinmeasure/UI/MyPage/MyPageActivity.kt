@@ -4,18 +4,28 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.exs.medivelskinmeasure.Connection.ConnectionService
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.Member.Join.JoinActivity
 import com.exs.medivelskinmeasure.UI.Member.Join.TermDetailActivity
+import com.exs.medivelskinmeasure.common.CommonUtil
 import com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
 
+val LogoutRequestCode = 200
+
 class MyPageActivity : AppCompatActivity() {
 
+
+
     private lateinit var mTitleBar: CommonTitleBar
+
+    private lateinit var mTVLogoutID: TextView
+    private lateinit var mBtnLogout:AppCompatButton
 
     private lateinit var mViewMemberInfoModify: CommonTextListView
     private lateinit var mViewSignOut: CommonTextListView
@@ -32,6 +42,21 @@ class MyPageActivity : AppCompatActivity() {
 
         initUI()
         setCommonListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val token = CommonUtil.getPreferenceString(this, getString(R.string.pref_key_auto_login_token))
+        token?.let {
+            ConnectionService.getUserInfo(it, { result, data ->
+                runOnUiThread {
+                    if(result) {
+                         mTVLogoutID.text = data!!.data.content!!.memberId
+                    }
+                }
+            })
+        }
     }
 
     private fun initUI() {
@@ -58,6 +83,9 @@ class MyPageActivity : AppCompatActivity() {
 
         mViewHomePage = findViewById(R.id.ViewMyPageHomePage)
         mViewHomePage.mStrTitle = getString(R.string.str_ko_my_page_home_page)
+
+        mTVLogoutID = findViewById(R.id.TVMyPageLogoutID)
+        mBtnLogout = findViewById(R.id.BtnMyPageLogout)
     }
 
     private fun setCommonListener() {
@@ -106,6 +134,15 @@ class MyPageActivity : AppCompatActivity() {
         mViewHomePage.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_home_page_medibel)))
             startActivity(intent)
+        }
+
+        mBtnLogout.setOnClickListener {
+            CommonUtil.setPreferenceString(this@MyPageActivity, getString(R.string.pref_key_is_auto_login), "false")
+            CommonUtil.setPreferenceString(this@MyPageActivity, getString(R.string.pref_key_auto_login_token), "")
+
+            setResult(LogoutRequestCode)
+            finish()
+
         }
     }
 }
