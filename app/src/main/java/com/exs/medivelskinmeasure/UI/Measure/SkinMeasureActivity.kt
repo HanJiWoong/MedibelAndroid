@@ -20,7 +20,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import com.exs.medivelskinmeasure.Device.mqtt.MQTTMeasuredResultData
 import com.exs.medivelskinmeasure.Device.mqtt.MQTTMeasuringRequest
@@ -28,7 +27,6 @@ import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
 import com.exs.medivelskinmeasure.Device.mqtt.MqttDataStep
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.common.CommonUtil
-import com.exs.medivelskinmeasure.common.CommonUtil.setPreferenceString
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
@@ -74,7 +72,7 @@ class SkinMeasureActivity : AppCompatActivity() {
         super.onStart()
 
         CommonUtil.getPreferenceString(this, getString(R.string.pref_key_device_wifi_ip))?.let {
-            startPlayer(it)
+            startPlayer("rtsp://$it:6281")
         }
     }
 
@@ -111,6 +109,8 @@ class SkinMeasureActivity : AppCompatActivity() {
             add("--drop-late-frames")
             add("--skip-frames")
             add("--rtsp-tcp")
+            add("--rtp-client-port=6281")
+            add("--rtsp-http-port=6281")
             add("-vvv")
         })
         mediaPlayer = MediaPlayer(libVlc)
