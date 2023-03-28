@@ -94,7 +94,7 @@
             android:enabled="true"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:includeFontPadding="false"
-            android:text="@string/str_ko_skin_measure"
+            android:text="@string/str_ko_skin_measure_result"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -17,6 +17,8 @@ import com.exs.medivelskinmeasure.UI.MyPage.MyPageActivity
 
 
 class MainActivity : AppCompatActivity() {
+    private var waitTime = 0L
+
 
     private lateinit var mViewMainTop:CommonMainTop
     private lateinit var mIBHospital:AppCompatImageButton
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         initUI()
         setCommonListener()
+        registMQTTListener()
     }
 
     override fun onDestroy() {
@@ -42,32 +45,26 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         Constants.measureMode = MeasureMode.None
-        val checkResult = MqttClient.checkMqttConnection(this)
+        MqttClient.checkMqttConnection(this, {result ->
+            if(result) {
 
-        if(checkResult) {
-            MqttClient.listener = object : MqttClient.MQTTClientInterface {
-                override fun batterState(voltage: Double, level: Double) {
-                    if(level < 2) {
-                        mViewMainTop.setBatteryState(false)
-                    } else {
-                        mViewMainTop.setBatteryState(true)
-                    }
-                }
-
+            } else {
+                Toast.makeText(this@MainActivity, getString(R.string.str_ko_toast_device_connect_fail), Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, getString(R.string.str_ko_toast_device_connect_fail), Toast.LENGTH_SHORT).show()
-        }
+        })
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+        if(System.currentTimeMillis() - waitTime > 1500) {
+            waitTime = System.currentTimeMillis()
+            Toast.makeText(this, "한 번 더 누르시면 앱을 종료합니다.", Toast.LENGTH_SHORT).show()
+        } else finish()
     }
 
     fun initUI() {
         mViewMainTop = findViewById(R.id.ViewMainTop)
         mViewMainTop.setLogoButtonEnabled(false)
+        mViewMainTop.showLogo()
 
         mIBHospital = findViewById(R.id.IBMainHospital)
         mIBBeautyShop = findViewById(R.id.IBMainBeautyShop)
@@ -109,6 +106,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun registMQTTListener() {
+        MqttClient.listener = object : MqttClient.MQTTClientInterface {
+            override fun batterState(voltage: Double, level: Double) {
+                if(level < 2) {
+                    mViewMainTop.setBatteryState(false)
+                } else {
+                    mViewMainTop.setBatteryState(true)
+                }
+            }
+
+            override fun responseUserInfo(result: Boolean, msg: String?) {
+                super.responseUserInfo(result, msg)
+            }
+        }
     }
 
 

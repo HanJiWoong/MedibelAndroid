@@ -7,7 +7,7 @@
     tools:context=".UI.Main.MainAnimalHospitalActivity">
 
     <com.exs.medivelskinmeasure.UI.Main.Component.CommonMainTop
-        android:id="@+id/ViewMainHumanTop"
+        android:id="@+id/ViewMainAnimalTop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="h,36:5"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ViewMainHumanTop">
+        app:layout_constraintTop_toBottomOf="@id/ViewMainAnimalTop">
 
         <ImageView
             android:layout_width="0dp"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/TVMainHumanTxt1"
+            android:id="@+id/TVMainAnimalTxt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/TVMainHumanTxt2"
+            android:id="@+id/TVMainAnimalTxt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -60,10 +60,10 @@
             android:textColor="@color/text_4"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TVMainHumanTxt1" />
+            app:layout_constraintTop_toBottomOf="@id/TVMainAnimalTxt1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/BtnMainHumanMeasureSkin"
+            android:id="@+id/BtnMainAnimalMeasureSkin"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_common_round_button"
@@ -82,7 +82,7 @@
             app:layout_constraintWidth_percent="0.916666667" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/CLMainHumanShowSendList"
+            android:id="@+id/CLMainAnimalShowSendList"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_send_list_show"
@@ -95,7 +95,7 @@
             app:layout_constraintWidth_percent="0.916666667">
 
             <TextView
-                android:id="@+id/TVMainHumanSendTitle"
+                android:id="@+id/TVMainAnimalSendTitle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
@@ -119,7 +119,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/TVMainHumanSendCount"
+                    android:id="@+id/TVMainAnimalSendCount"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:fontFamily="@font/notosanscjkkr_regular"

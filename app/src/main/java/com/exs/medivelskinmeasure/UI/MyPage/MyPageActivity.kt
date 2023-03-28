@@ -5,12 +5,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.exs.medivelskinmeasure.Connection.ConnectionService
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.Member.Join.JoinActivity
 import com.exs.medivelskinmeasure.UI.Member.Join.TermDetailActivity
+import com.exs.medivelskinmeasure.UI.Member.LoginActivity
 import com.exs.medivelskinmeasure.common.CommonUtil
 import com.exs.medivelskinmeasure.common.custom_ui.CommonCheckBox
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTextListView
@@ -100,8 +102,16 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         mViewSignOut.setOnClickListener {
+            val withDrawalLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                CommonUtil.setPreferenceString(this@MyPageActivity, getString(R.string.pref_key_is_auto_login), "false")
+                CommonUtil.setPreferenceString(this@MyPageActivity, getString(R.string.pref_key_auto_login_token), "")
+
+                setResult(LogoutRequestCode)
+                finish()
+            }
+
             val intent = Intent(this@MyPageActivity,SignOutActivity::class.java)
-            startActivity(intent)
+            withDrawalLauncher.launch(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 

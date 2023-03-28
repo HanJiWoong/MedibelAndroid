@@ -104,8 +104,10 @@ class DeviceInfoActivity : AppCompatActivity() { //, SerialListener, ServiceConn
         mBtnConnect = findViewById(R.id.BtnDeviceInfoConnection)
 
         // Test Code
-        val apName: String = "Boilingpoint"
-        val pass: String = "boiling100"
+        val apName: String = "Mytalk_wifi"
+        val pass: String = "mytalk2020+"
+//        val apName: String = "Boilingpoint"
+//        val pass: String = "boiling100"
 //        val apName: String = "Medivelbio_5G"
 //        val pass: String = "13201320"
         mETAPInfoSSID.setText(apName)

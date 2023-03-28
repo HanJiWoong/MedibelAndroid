@@ -25,39 +25,6 @@
         app:layout_constraintTop_toBottomOf="@id/ViewPWChangeTitleBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/CLPWChangeOriginPW"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="14.5dp"
-            android:background="@drawable/bg_common_edit_text_bg"
-            app:layout_constraintDimensionRatio="h, 33:5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.916666667">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/ETPWChangeOriginPW"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="#00FFFFFF"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:hint="@string/str_ko_pw_change_origin_pw_hint"
-                android:includeFontPadding="false"
-                android:inputType="text"
-                android:textColor="@color/text_1"
-                android:textColorHint="#D7D7D7"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CLPWChangeNewPW"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -66,7 +33,7 @@
             app:layout_constraintDimensionRatio="h, 33:5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CLPWChangeOriginPW"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.916666667">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -79,7 +46,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:hint="@string/str_ko_join_info_pw_hint"
                 android:includeFontPadding="false"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/text_1"
                 android:textColorHint="#D7D7D7"
                 android:textSize="16sp"
@@ -112,7 +79,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:hint="@string/str_ko_join_info_pw_match_hint"
                 android:includeFontPadding="false"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@color/text_1"
                 android:textColorHint="#D7D7D7"
                 android:textSize="16sp"

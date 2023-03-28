@@ -1,9 +1,6 @@
 package com.exs.medivelskinmeasure.Connection
 
-import com.exs.medivelskinmeasure.Connection.dto.request.FindIDRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.FindPWRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.LoginRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.SignupRequestDTO
+import com.exs.medivelskinmeasure.Connection.dto.request.*
 import com.exs.medivelskinmeasure.Connection.dto.result.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -53,11 +50,23 @@ interface RetrofitService {
     // ID 중복 확인
     @GET("user/duplicated_check")
     fun checkDupID(
-        @Query("id") memberID:String
+        @Query("id") memberID: String
     ): Call<CheckDupIDResultDTO>
 
     // 회원 정보
     @GET("user/user_info")
-    fun userInfo(@Query("hash_token") token:String):Call<UserInfoResultDTO>
+    fun userInfo(@Query("hash_token") token: String): Call<UserInfoResultDTO>
+
+    // 회원 정보 업데이트
+    @POST("user/user_info_update")
+    fun userInfoUpdate(@Body body: UserInfoUpdateRequestDTO): Call<UserInfoUpdateResultDTO>
+
+    // 비밀번호 변경
+    @POST("user/password_update")
+    fun changePW(@Body body:ChangePWRequestDTO): Call<ChangePWResultDTO>
+
+    // 회원 탈퇴
+    @DELETE("user/withdrawal")
+    fun withDrawal(@Body body:WithDrawalRequestDTO): Call<WithDrawalResultDTO>
 
 }

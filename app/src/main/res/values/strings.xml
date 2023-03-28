@@ -26,6 +26,8 @@
     <string name="str_ko_sign_out">회원탈퇴</string>
     <string name="str_ko_connect">연결하기</string>
 
+    <string name="str_ko_server_error">서버 요청 오류</string>
+
     <string name="str_ko_lang_kor">한국어</string>
 
     <string name="str_ko_terms">약관 동의</string>
@@ -61,13 +63,13 @@
     <string name="str_ko_main_txt_2">피부측정 전에 측정대상을 선택하세요</string>
 
     <string name="str_ko_main_hospital_txt_1">병/의원 피부측정</string>
-    <string name="str_ko_main_hospital_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+    <string name="str_ko_main_hospital_txt_2">측정을 원하시나요?\n디바이스를 이미지 촬영 모드로 진입하세요.\n그리고, 화면 아래 피부 측정 버튼을 눌러주세요.</string>
 
     <string name="str_ko_main_animal_hospital_txt_1">동물병원 피부측정</string>
-    <string name="str_ko_main_animal_hospital_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+    <string name="str_ko_main_animal_hospital_txt_2">측정을 원하시나요?\n디바이스를 이미지 촬영 모드로 진입하세요.\n그리고, 화면 아래 피부 측정 버튼을 눌러주세요.</string>
 
     <string name="str_ko_main_beauty_shop_txt_1">뷰티샵 피부측정</string>
-    <string name="str_ko_main_beauty_shop_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+    <string name="str_ko_main_beauty_shop_txt_2">측정을 원하시나요?\n디바이스를 이미지 촬영 모드로 진입하세요.\n그리고, 화면 아래 피부 측정 버튼을 눌러주세요.</string>
 
     <string name="str_ko_main_clinical_txt_1">임상 피부측정</string>
     <string name="str_ko_main_clinical_txt_2">어떤 대상의 측정을 원하시나요?\n화면 아래 버튼을 눌러 대상을 선택하세요</string>
@@ -76,14 +78,16 @@
     <string name="str_ko_main_clinical_animal">동물</string>
 
     <string name="str_ko_main_clinical_human_txt_1">임상(사람) 피부측정</string>
-    <string name="str_ko_main_clinical_human_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+    <string name="str_ko_main_clinical_human_txt_2">측정을 원하시나요?\n디바이스를 이미지 촬영 모드로 진입하세요.\n그리고, 화면 아래 피부 측정 버튼을 눌러주세요.</string>
 
     <string name="str_ko_main_clinical_animal_txt_1">임상(동물) 피부측정</string>
-    <string name="str_ko_main_clinical_animal_txt_2">측정을 원하시나요?\n화면 아래 버튼을 눌러 측정하세요</string>
+    <string name="str_ko_main_clinical_animal_txt_2">측정을 원하시나요?\n디바이스를 이미지 촬영 모드로 진입하세요.\n그리고, 화면 아래 피부 측정 버튼을 눌러주세요.</string>
 
     <string name="str_ko_connect_state_title">연결상태</string>
 
+    <string name="str_ko_skin_measure_prepare">장치연결</string>
     <string name="str_ko_skin_measure">피부측정</string>
+    <string name="str_ko_skin_measure_result">피부측정결과확인</string>
     <string name="str_ko_skin_measure_start">피부측정을 시작합니다</string>
     <string name="str_ko_skin_measure_start_desc">- 피부에 측정기기를 접촉시키고 측정버튼을 누르세요\n- 측정기기의 배터리 부족 또는 전원이 꺼질경우 원활한 측정이 어렵습니다. 다시 시작하세요</string>
     <string name="str_ko_skin_measure_complete">피부측정이 완료 되었습니다</string>

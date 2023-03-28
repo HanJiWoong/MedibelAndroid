@@ -81,7 +81,7 @@ class SkinMeasureActivity : AppCompatActivity() {
         mTVSkinMeasureDesc = findViewById(R.id.TVSkinMeasureInfoDesc)
 
         mBtnMeasure = findViewById(R.id.BtnSkinMeasure)
-
+        mBtnMeasure.isEnabled = false
     }
 
     private fun setCommonListener() {
@@ -90,39 +90,9 @@ class SkinMeasureActivity : AppCompatActivity() {
         }
 
         mBtnMeasure.setOnClickListener {
-            if (!mIsComplete) {
-//                mIsComplete = true
-//
-//                mBtnMeasure.text = getString(R.string.str_ko_skin_measure_complete_btn_title)
-//
-//                (mCLProgressContent.layoutParams as ConstraintLayout.LayoutParams)
-//                    .matchConstraintPercentWidth = 1.0f
-//                mCLProgressContent.requestLayout()
-//
-//                val gd = GradientDrawable(
-//                    GradientDrawable.Orientation.LEFT_RIGHT,
-//                    intArrayOf(
-//                        Color.parseColor("#ee7700"),
-//                        Color.parseColor("#ebcc00")
-//                    )
-//                )
-//                gd.cornerRadius = 9f
-//
-//                mCLProgressContent.background = gd
-//
-//                mTVSkinMeasureInfo.text = getString(R.string.str_ko_skin_measure_complete)
-//                mTVSkinMeasureDesc.text = getString(R.string.str_ko_skin_measure_complete_desc)
-//
-//                mTitleBar.setHiddenBackBtn(true)
-                MqttClient.publishUserInfoSetting(this)
-
-
-            } else {
-                val intent = Intent(this@SkinMeasureActivity, SkinMeasureResultActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
-            }
-
+            val intent = Intent(this@SkinMeasureActivity, SkinMeasureResultActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
     }
@@ -143,9 +113,10 @@ class SkinMeasureActivity : AppCompatActivity() {
                     MqttDataStep.measureImage.ordinal -> {
                         runOnUiThread {
                             val no = data.parameters.measure_data.image_no
-                            val width:Float = (0.0909 * no).toFloat()
+                            val width: Float = (0.0909 * no).toFloat()
 
-                            val params = mCLProgressContent.layoutParams as ConstraintLayout.LayoutParams
+                            val params =
+                                mCLProgressContent.layoutParams as ConstraintLayout.LayoutParams
 
                             params.matchConstraintPercentWidth = width
                             mCLProgressContent.requestLayout()
@@ -168,7 +139,10 @@ class SkinMeasureActivity : AppCompatActivity() {
             }
 
             override fun imageReusltData(data: MQTTMeasuredResultData) {
-                Log.e("TEST","----------------------------------------------------------------------------------??????????????????????????????????????????????????????")
+                Log.e(
+                    "TEST",
+                    "----------------------------------------------------------------------------------??????????????????????????????????????????????????????"
+                )
 
                 /**
                  * EMC TEST 를 위해 추가한 코드
@@ -215,6 +189,7 @@ class SkinMeasureActivity : AppCompatActivity() {
                     Intent(this@SkinMeasureActivity, SkinMeasureResultActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+                mBtnMeasure.isEnabled = true
             }
         }
     }

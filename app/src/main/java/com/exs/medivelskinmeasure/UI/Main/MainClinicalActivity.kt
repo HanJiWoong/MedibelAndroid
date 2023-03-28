@@ -23,32 +23,25 @@ class MainClinicalActivity : AppCompatActivity() {
 
         initUI()
         setCommonListener()
+        registMQTTListener()
     }
 
     override fun onResume() {
         super.onResume()
 
         Constants.measureMode = MeasureMode.Clinical
-        val checkResult = MqttClient.checkMqttConnection(this)
+        MqttClient.checkMqttConnection(this, {result ->
+            if(result) {
 
-        if(checkResult) {
-            MqttClient.listener = object : MqttClient.MQTTClientInterface {
-                override fun batterState(voltage: Double, level: Double) {
-                    if(level < 2) {
-                        mViewMainTop.setBatteryState(false)
-                    } else {
-                        mViewMainTop.setBatteryState(true)
-                    }
-                }
-
+            } else {
+                Toast.makeText(this@MainClinicalActivity, getString(R.string.str_ko_toast_device_connect_fail), Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, getString(R.string.str_ko_toast_device_connect_fail), Toast.LENGTH_SHORT).show()
-        }
+        })
     }
 
     fun initUI() {
         mViewMainTop = findViewById(R.id.ViewMainClinicalTop)
+        mViewMainTop.showBack()
 
         mIBHuman = findViewById(R.id.BtnMainClinicalHumanMeasureSkin)
         mIBAnimal = findViewById(R.id.BtnMainClinicalAnimalMeasureSkin)
@@ -65,6 +58,23 @@ class MainClinicalActivity : AppCompatActivity() {
             val intent = Intent(this@MainClinicalActivity, MainClinicalAnimalActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+        }
+    }
+
+
+    fun registMQTTListener() {
+        MqttClient.listener = object : MqttClient.MQTTClientInterface {
+            override fun batterState(voltage: Double, level: Double) {
+                if(level < 2) {
+                    mViewMainTop.setBatteryState(false)
+                } else {
+                    mViewMainTop.setBatteryState(true)
+                }
+            }
+
+            override fun responseUserInfo(result: Boolean, msg: String?) {
+                super.responseUserInfo(result, msg)
+            }
         }
     }
 }
