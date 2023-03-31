@@ -151,6 +151,7 @@
     <string name="intent_key_common_text_popup_content">CommonTextPopupContent</string>
 
     <string name="intent_key_common_List_popup_type">listPopupType</string>
+    <string name="intent_key_common_list_popup_selected_data">selectedData</string>
     <string name="intent_data_common_list_popup_type_birth">생년</string>
     <string name="intent_data_common_list_popup_type_gender">성별</string>
     <string name="intent_data_common_list_popup_type_region">부위</string>

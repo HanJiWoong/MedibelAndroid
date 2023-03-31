@@ -1,18 +1,24 @@
 package com.exs.medivelskinmeasure.UI.CustomerInfo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.exs.medivelskinmeasure.Constants
-import com.exs.medivelskinmeasure.MeasureMode
+import com.exs.medivelskinmeasure.Device.mqtt.MqttClient
 import com.exs.medivelskinmeasure.R
 import com.exs.medivelskinmeasure.UI.AnalysisResult.HospitalAnalysisResultActivity
-import com.exs.medivelskinmeasure.UI.Measure.SkinMeasureActivity
 import com.exs.medivelskinmeasure.common.custom_ui.CommonDropDownBarView
 import com.exs.medivelskinmeasure.common.custom_ui.CommonTitleBar
 import com.exs.medivelskinmeasure.common.custom_ui.CustomInputView
 import com.exs.medivelskinmeasure.common.popup.CommonListPopup
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 
 class HospitalCustomerInfoActivity : AppCompatActivity() {
     private lateinit var mTitleBar: CommonTitleBar
@@ -25,12 +31,56 @@ class HospitalCustomerInfoActivity : AppCompatActivity() {
 
     private lateinit var mBtnAnalysisResult: AppCompatButton
 
+    private var mArrResultImg: ArrayList<Bitmap> = ArrayList()
+
+    val mPopupLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        val listType = it.data?.getStringExtra(getString(R.string.intent_key_common_List_popup_type))
+        val selectedData = it.data?.getStringExtra(getString(R.string.intent_key_common_list_popup_selected_data))
+
+        if (listType != null) {
+            if(listType.equals(getString(R.string.intent_data_common_list_popup_type_birth))) {
+                mViewCustomerBirthYear.mStrContent = selectedData.toString()
+            } else if(listType.equals(getString(R.string.intent_data_common_list_popup_type_gender))) {
+                mViewCustomerGender.mStrContent = selectedData.toString()
+            } else if(listType.equals(getString(R.string.intent_data_common_list_popup_type_region))) {
+                mViewCustomerRegion.mStrContent= selectedData.toString()
+
+                if(selectedData.toString().equals("몸")) {
+                    mViewCustomerDetailRegion.mStrContent = ""
+                }
+            } else if(listType.equals(getString(R.string.intent_data_common_list_popup_type_detail_region))) {
+                mViewCustomerDetailRegion.mStrContent = selectedData.toString()
+            }
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_customer_info)
 
         initUI()
         setCommonListener()
+
+        val dataArr = MqttClient.mResultImgArray
+
+        CoroutineScope(Dispatchers.Default).async {
+            if (dataArr != null) {
+                for (data in dataArr) {
+
+//                    val imgData: ByteArray = BitmapFactory.decodeStream(.byteInputStream())
+                    val imgBytes = Base64.decode(data.image_data, 0)
+                    val bitmap = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
+
+                    mArrResultImg.add(bitmap)
+
+                }
+            }
+
+//            runOnUiThread {
+//                showImage()
+//            }
+        }
     }
 
     private fun initUI() {
@@ -75,7 +125,7 @@ class HospitalCustomerInfoActivity : AppCompatActivity() {
                 getString(R.string.intent_key_common_List_popup_type),
                 getString(R.string.intent_data_common_list_popup_type_birth)
             )
-            startActivity(intent)
+            mPopupLauncher.launch(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
@@ -85,7 +135,7 @@ class HospitalCustomerInfoActivity : AppCompatActivity() {
                 getString(R.string.intent_key_common_List_popup_type),
                 getString(R.string.intent_data_common_list_popup_type_gender)
             )
-            startActivity(intent)
+            mPopupLauncher.launch(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
@@ -95,19 +145,23 @@ class HospitalCustomerInfoActivity : AppCompatActivity() {
                 getString(R.string.intent_key_common_List_popup_type),
                 getString(R.string.intent_data_common_list_popup_type_region)
             )
-            startActivity(intent)
+            mPopupLauncher.launch(intent)
             overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
         mViewCustomerDetailRegion.setOnClickListener {
+            if(mViewCustomerRegion.mStrContent.equals("얼굴")) {
+                val intent = Intent(this, CommonListPopup::class.java)
+                intent.putExtra(
+                    getString(R.string.intent_key_common_List_popup_type),
+                    getString(R.string.intent_data_common_list_popup_type_detail_region)
+                )
+                mPopupLauncher.launch(intent)
+                overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
+            } else {
+                Toast.makeText(this, "얼굴만 선택 가능합니다.", Toast.LENGTH_SHORT).show()
+            }
 
-            val intent = Intent(this, CommonListPopup::class.java)
-            intent.putExtra(
-                getString(R.string.intent_key_common_List_popup_type),
-                getString(R.string.intent_data_common_list_popup_type_detail_region)
-            )
-            startActivity(intent)
-            overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
 
         mBtnAnalysisResult.setOnClickListener {
