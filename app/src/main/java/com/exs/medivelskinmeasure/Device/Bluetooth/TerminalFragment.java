@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.Editable;
@@ -58,6 +59,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
 
     private String mStrData;
+
+    private Thread mCheckConnect = null;
 
     /*
      * Lifecycle
@@ -238,6 +241,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
      */
     private void connect() {
         Log.e("Debug", "connect");
+        Log.e("syj", "접속 체크 시작");
+        // 접속 체크 시작
+        startCheckConnect();
 
         try {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -253,6 +259,46 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
     }
 
+    private void startCheckConnect() {
+        Log.d("CheckConnect", "startCheckConnect()");
+
+        if (mCheckConnect != null) {
+            mCheckConnect.interrupt();
+        }
+
+        mCheckConnect = new Thread(() -> {
+            for(int i=0; i<15; i++) {
+                try {
+                    Log.d("CheckConnect", "check connect counter seconds = " + i);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Log.d("CheckConnect", "InterruptedException");
+                    mCheckConnect = null;
+                    return;
+                }
+            }
+
+            Log.d("CheckConnect", "end check connect.");
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("CheckConnect", "접속 타임아웃시 init button");
+                    connected = Connected.False;
+                    Toast.makeText(getActivity(), "접속 실패", Toast.LENGTH_SHORT).show();
+                    mActivity.setBtnState("기기 연결", true);
+                }
+            });
+        });
+        mCheckConnect.start();
+    }
+
+    private void stopCheckConnect() {
+        Log.d("CheckConnect", "stopCheckConnect()");
+        if (mCheckConnect != null) {
+            mCheckConnect.interrupt();
+        }
+    }
+
     private void disconnect() {
         Log.e("Debug", "disconnect");
 
@@ -263,6 +309,9 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private void send(String str) {
         Log.e("Debug", "send");
 
+        Log.e("CheckConnect", "접속 체크 중지");
+        // 접속 체크 중지
+        stopCheckConnect();
 
         if (connected != Connected.True) {
             mActivity.setBtnState("연결 중", false);
@@ -361,12 +410,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
      */
     @Override
     public void onSerialConnect() {
-        status("connected");
+        if (connected != Connected.False) { // 접속 타임아웃시(초기화함) 뒤늦게 접속되도 무시처리
+            status("connected");
 
-        mActivity.setBtnState("연결 중", false);
+            Log.e("CheckConnect", "onSerialConnect");
+            mActivity.setBtnState("연결 중", false);
 
-        connected = Connected.True;
-        // 여기서 Activity가 데이터를 전달하도록 유도해야함.
+            connected = Connected.True;
+            // 여기서 Activity가 데이터를 전달하도록 유도해야함.
 
 //        Thread th = new Thread(new Runnable() {
 //            @Override
@@ -375,24 +426,26 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 //            }
 //        });
 //        th.run();
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-                send(sendText.getText().toString());
+                    send(sendText.getText().toString());
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
     @Override
     public void onSerialConnectError(Exception e) {
-        status("connection failed: " + e.getMessage());
-        mActivity.setBtnState("장치 연결", true);
+        if (connected != Connected.False) { // 접속 타임아웃시(초기화함) 뒤늦게 접속실패되도 무시처리
+            status("connection failed: " + e.getMessage());
+            mActivity.setBtnState("장치 연결", true);
 
-        disconnect();
-        // Activity의 연결 버튼이 다시 활성화
+            disconnect();
+            // Activity의 연결 버튼이 다시 활성화
+        }
     }
 
     @Override
