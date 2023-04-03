@@ -1,5 +1,6 @@
 package com.exs.medivelskinmeasure.common.popup
 
+import android.content.Intent
 import android.net.wifi.ScanResult
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exs.medivelskinmeasure.R
+import com.exs.medivelskinmeasure.UI.Member.LoginActivity
+import com.exs.medivelskinmeasure.UI.MyPage.LogoutRequestCode
 
 class CommonListPopup : AppCompatActivity() {
 
@@ -47,13 +50,25 @@ class CommonListPopup : AppCompatActivity() {
         mRVList.layoutManager = LinearLayoutManager(this)
 
         mListAdapter = ListAdapter()
+        mListAdapter!!.setOnItemClickListener(object:ListAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, ssid: String, pos: Int) {
+                val str = mListAdapter!!.mArrListData?.get(pos)
+                if(str != null) {
+                    intent.putExtra(getString(R.string.intent_key_common_List_popup_type), mVarListType)
+                    intent.putExtra(getString(R.string.intent_key_common_list_popup_selected_data), str)
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
+            }
+        })
+
         mListAdapter!!.setList(onGenerationData())
 
         mRVList.adapter = mListAdapter
 
-
-
-
+        if (mVarListType == getString(R.string.intent_data_common_list_popup_type_birth)) {
+            mRVList.scrollToPosition(100)
+        }
     }
 
     fun setCommonListener() {
@@ -89,7 +104,7 @@ class CommonListPopup : AppCompatActivity() {
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
-    private var mArrListData: List<String>? = null
+    var mArrListData: List<String>? = null
     private var mClickListener: ((Int, String) -> Unit)? = null
     private var mIntSelect: Int = -1
 

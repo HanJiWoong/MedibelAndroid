@@ -13,11 +13,6 @@ import kotlinx.coroutines.*
 //import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 
-//import org.eclipse.paho.android.service.MqttAndroidClient
-
-
-
-
 
 object MqttClient {
     private val TAG: String = "MqttClient"
@@ -27,7 +22,7 @@ object MqttClient {
 
     lateinit var listener: MQTTClientInterface
 
-    var mResultImgArray:ArrayList<MQTTMeasuredResultData> = ArrayList()
+    var mResultImgArray: ArrayList<MQTTMeasuredResultData> = ArrayList()
 
     interface MQTTClientInterface {
         fun batterState(voltage: Double, level: Double) {}
@@ -35,33 +30,36 @@ object MqttClient {
         fun numericResultData(temp: Float, moisture: Int) {}
         fun imageReusltData(data: MQTTMeasuredResultData) {}
         fun measuredFinish() {}
+        fun responseUserInfo(result: Boolean, msg: String?) {}
     }
 
     init {
 
     }
 
-    fun checkMqttConnection(context: Context): Boolean {
+    fun checkMqttConnection(context: Context, checkResult: (result: Boolean) -> Unit) {
         if (_mqttClient != null) {
             if (_mqttClient!!.isConnected) {
-                setConnectionToken(context)
-                return true
+//                setConnectionToken(context)
+//                checkResult(true)
+                setCheckToken(context, checkResult)
 
             } else {
                 try {
-                    return tryConnection(context)
+                    checkResult(tryConnection(context))
                 } catch (e: MqttException) {
                     resetConnectionData(context)
                     e.printStackTrace()
 
-                    return false
+                    checkResult(false)
                 }
             }
 
         } else {
-            return tryConnection(context)
+            checkResult(tryConnection(context))
         }
     }
+
 
     private fun tryConnection(context: Context): Boolean {
         val deviceIp = CommonUtil.getPreferenceString(
@@ -89,8 +87,7 @@ object MqttClient {
                         CommonUtil.getPreferenceString(
                             context,
                             context.getString(R.string.pref_key_device_clientId)
-                        )!!
-                        , Ack.MANUAL_ACK
+                        )!!, Ack.MANUAL_ACK
                     )
 
                     _mqttClient = tempClient
@@ -110,7 +107,57 @@ object MqttClient {
         }
     }
 
-    fun setConnectionToken(context:Context) {
+    fun setCheckToken(context: Context, checkResult: (result: Boolean) -> Unit) {
+        val token = _mqttClient!!.connect()
+
+        token.actionCallback = object : IMqttActionListener {
+            override fun onSuccess(asyncActionToken: IMqttToken?) {
+
+            }
+
+            override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+                checkResult(false)
+            }
+        }
+
+        token.client.setCallback(object : MqttCallback {
+            override fun connectionLost(cause: Throwable?) {
+                Log.e(TAG, "Connection Lost => ${cause.toString()}")
+                checkResult(false)
+            }
+
+            override fun messageArrived(topic: String?, message: MqttMessage?) {
+                Log.e(
+                    TAG,
+                    "topic => ${topic}, ${message}"
+                )
+
+                val string = message!!.toString()
+                val element = JsonParser.parseString(string)
+
+                if (topic != null) {
+                    var command = ""
+
+                    if (topic.contains("request")) command =
+                        element.asJsonObject.get("request").asString
+                    else command = element.asJsonObject.get("response").asString
+
+                    if (command.equals(MQTTString.UserInfo)) {
+                        setConnectionToken(context)
+                        checkResult(true)
+                    }
+                }
+            }
+
+            override fun deliveryComplete(token: IMqttDeliveryToken?) {
+            }
+
+        })
+
+        publishUserInfoSetting(context)
+    }
+
+    fun setConnectionToken(context: Context) {
         val token = _mqttClient!!.connect()
 
         token.actionCallback = object : IMqttActionListener {
@@ -119,8 +166,16 @@ object MqttClient {
 
                 subscribeTopic()
 
-                CommonUtil.setPreferenceString(context, context.getString(R.string.pref_key_device_wifi_ip), "")
-                CommonUtil.setPreferenceString(context, context.getString(R.string.pref_key_device_serial), "")
+//                CommonUtil.setPreferenceString(
+//                    context,
+//                    context.getString(R.string.pref_key_device_wifi_ip),
+//                    ""
+//                )
+//                CommonUtil.setPreferenceString(
+//                    context,
+//                    context.getString(R.string.pref_key_device_serial),
+//                    ""
+//                )
 
             }
 
@@ -230,60 +285,80 @@ object MqttClient {
                 )
 
                 val string = message!!.toString()
-
                 val element = JsonParser.parseString(string)
-                val request = element.asJsonObject.get("request").asString
 
-                if (request.equals(MQTTString.Battery)) {
+                if (topic != null) {
+                    var command = ""
 
-                    val gsonObj = Gson().fromJson<MQTTConnectionBatteryRequest>(
-                        string,
-                        MQTTConnectionBatteryRequest::class.java
-                    )
-
-                    listener.batterState(
-                        gsonObj.parameters.voltage.toDouble(),
-                        gsonObj.parameters.level.toDouble()
-                    )
-                    responseReportBattery()
-                } else if (request.equals(MQTTString.status)) {
-                    val gsonObj = Gson().fromJson<MQTTMeasuringRequest>(
-                        string,
-                        MQTTMeasuringRequest::class.java
-                    )
-
-                    if (gsonObj.parameters.step == MQTTStep.waitImage.ordinal || gsonObj.parameters.step == MQTTStep.measureImage.ordinal || gsonObj.parameters.step == MQTTStep.measureTempMoisture.ordinal || gsonObj.parameters.step == MQTTStep.resultSend.ordinal) {
-                        listener.measuringData(gsonObj)
-                    } else if (gsonObj.parameters.step == MQTTStep.idle.ordinal) {
-                        listener.measuredFinish()
-                    }
+                    if (topic.contains("request")) command =
+                        element.asJsonObject.get("request").asString
+                    else command = element.asJsonObject.get("response").asString
 
 
-                    responseMeasuring()
+                    if (command.equals(MQTTString.Battery)) {
 
-                } else if (request.equals(MQTTString.result)) {
-                    responseMeasureEnd()
-
-                    val gsonObj = Gson().fromJson<MQTTMeasuredResult>(
-                        string,
-                        MQTTMeasuredResult::class.java
-                    )
-
-                    if (gsonObj.parameters.data.image_name.isEmpty()) {
-                        listener.numericResultData(
-                            gsonObj.parameters.data.temp,
-                            gsonObj.parameters.data.moisture
+                        val gsonObj = Gson().fromJson<MQTTConnectionBatteryRequest>(
+                            string,
+                            MQTTConnectionBatteryRequest::class.java
                         )
-                    } else {
-                        mResultImgArray.add(gsonObj.parameters.data)
+
+                        listener.batterState(
+                            gsonObj.parameters.voltage.toDouble(),
+                            gsonObj.parameters.level.toDouble()
+                        )
+                        responseReportBattery()
+                    } else if (command.equals(MQTTString.status)) {
+                        val gsonObj = Gson().fromJson<MQTTMeasuringRequest>(
+                            string,
+                            MQTTMeasuringRequest::class.java
+                        )
+
+                        if (gsonObj.parameters.step == MQTTStep.waitImage.ordinal || gsonObj.parameters.step == MQTTStep.measureImage.ordinal || gsonObj.parameters.step == MQTTStep.measureTempMoisture.ordinal || gsonObj.parameters.step == MQTTStep.resultSend.ordinal) {
+                            listener.measuringData(gsonObj)
+                        } else if (gsonObj.parameters.step == MQTTStep.idle.ordinal) {
+                            listener.measuredFinish()
+                        }
+
+
+                        responseMeasuring()
+
+                    } else if (command.equals(MQTTString.result)) {
+                        responseMeasureEnd()
+
+                        val gsonObj = Gson().fromJson<MQTTMeasuredResult>(
+                            string,
+                            MQTTMeasuredResult::class.java
+                        )
+
+                        if (gsonObj.parameters.data.image_name.isEmpty()) {
+                            listener.numericResultData(
+                                gsonObj.parameters.data.temp,
+                                gsonObj.parameters.data.moisture
+                            )
+                        } else {
+                            mResultImgArray.add(gsonObj.parameters.data)
 //                        listener.imageReusltData(gsonObj.parameters.data)
+                        }
+                    } else if (command.equals(MQTTString.UserInfo)) {
+                        val gsonObj = Gson().fromJson<MQTTConnectionUserInfoResponse>(
+                            string,
+                            MQTTConnectionUserInfoResponse::class.java
+                        )
+
+                        if (gsonObj.result.equals("OK")) {
+                            listener.responseUserInfo(true, null)
+                        } else {
+                            listener.responseUserInfo(false, gsonObj.reason.toString())
+                        }
                     }
                 }
-
             }
 
             override fun deliveryComplete(token: IMqttDeliveryToken?) {
-
+                Log.e(
+                    TAG,
+                    "token => ${token}"
+                )
             }
 
         })
@@ -334,6 +409,26 @@ object MqttClient {
                         topic, MqttMessage(
                             Gson().toJson(MQTTConnectionBatteryResponse(MQTTString.Battery, "OK"))
                                 .toByteArray()
+                        )
+                    )
+
+                }
+            } catch (e: MqttException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun responseReportStatus() {
+        CoroutineScope(Dispatchers.IO).async {
+            try {
+                _mqttClient?.let { client ->
+                    val topic: String =
+                        String.format(MQTTTopic.MQTTTopicReportResponse, _deviceSerial)
+
+                    client.publish(
+                        topic, MqttMessage(
+                            Gson().toJson(MQTTStatusResponse(MQTTString.status, "OK")).toByteArray()
                         )
                     )
 

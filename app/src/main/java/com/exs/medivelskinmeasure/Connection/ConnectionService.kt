@@ -1,10 +1,7 @@
 package com.exs.medivelskinmeasure.Connection
 
 import android.util.Log
-import com.exs.medivelskinmeasure.Connection.dto.request.FindIDRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.FindPWRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.LoginRequestDTO
-import com.exs.medivelskinmeasure.Connection.dto.request.SignupRequestDTO
+import com.exs.medivelskinmeasure.Connection.dto.request.*
 import com.exs.medivelskinmeasure.Connection.dto.result.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -222,4 +219,95 @@ object ConnectionService {
             }
         })
     }
+
+    /**
+     * 회원 정보 업데이트
+     */
+    fun updateUserInfo(
+        params: UserInfoUpdateRequestDTO,
+        result: (result: Boolean, data: UserInfoUpdateResultDTO?) -> Unit
+    ) {
+        mService.userInfoUpdate(params).enqueue(object : Callback<UserInfoUpdateResultDTO> {
+            override fun onResponse(
+                call: Call<UserInfoUpdateResultDTO>,
+                response: Response<UserInfoUpdateResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<UserInfoUpdateResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+
+        })
+    }
+
+    /**
+     * 비밀번호 변경
+     */
+    fun changePW(
+        params: ChangePWRequestDTO,
+        result: (result: Boolean, data: ChangePWResultDTO?) -> Unit
+    ) {
+        mService.changePW(params).enqueue(object : Callback<ChangePWResultDTO> {
+            override fun onResponse(
+                call: Call<ChangePWResultDTO>,
+                response: Response<ChangePWResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<ChangePWResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+
+        })
+    }
+
+    /**
+     * 회원 탈퇴
+     */
+    fun withDrawal(
+        token: String,
+        result: (result: Boolean, data: WithDrawalResultDTO?) -> Unit
+    ) {
+        val params = WithDrawalRequestDTO(token)
+        mService.withDrawal(params).enqueue(object : Callback<WithDrawalResultDTO> {
+            override fun onResponse(
+                call: Call<WithDrawalResultDTO>,
+                response: Response<WithDrawalResultDTO>
+            ) {
+                if (response.code() == 200) {
+                    if (response.body()!!.data.success) {
+                        result(true, response.body())
+                    } else {
+                        result(false, null)
+                    }
+                } else {
+                    result(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<WithDrawalResultDTO>, t: Throwable) {
+                result(false, null)
+            }
+        })
+    }
+
 }

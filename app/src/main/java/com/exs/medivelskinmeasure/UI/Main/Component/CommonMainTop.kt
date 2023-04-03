@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.exs.medivelskinmeasure.R
@@ -44,6 +45,8 @@ class CommonMainTop : ConstraintLayout {
     private lateinit var mContext:Context
 
     private lateinit var mIBLogo:AppCompatImageButton
+    private lateinit var mIBBack:AppCompatImageButton
+
     private lateinit var mIBConnectState:AppCompatImageButton
     private lateinit var mIBBattery:AppCompatImageButton
     private lateinit var mIBMyPage:AppCompatImageButton
@@ -65,6 +68,7 @@ class CommonMainTop : ConstraintLayout {
 
     fun initUI() {
         mIBLogo = findViewById(R.id.IBMainTopLogo)
+        mIBBack = findViewById(R.id.IBMainTopBack)
         mIBConnectState = findViewById(R.id.IBMainTopConnectState)
         mIBBattery = findViewById(R.id.IBMainTopBatteryState)
         mIBMyPage = findViewById(R.id.IBMainTopMyPage)
@@ -72,6 +76,11 @@ class CommonMainTop : ConstraintLayout {
 
     fun setCommonListener() {
         mIBLogo.setOnClickListener {
+            (mContext as AppCompatActivity).finish()
+        }
+
+        mIBBack.setOnClickListener()
+        {
             (mContext as AppCompatActivity).finish()
         }
 
@@ -87,7 +96,16 @@ class CommonMainTop : ConstraintLayout {
             logoutLauncher?.launch(intent)
             (mContext as AppCompatActivity).overridePendingTransition(R.anim.anim_fade_in, R.anim.anim_do_not_move)
         }
+    }
 
+    fun showLogo() {
+        mIBLogo.visibility = View.VISIBLE
+        mIBBack.visibility = View.GONE
+    }
+
+    fun showBack() {
+        mIBLogo.visibility = View.GONE
+        mIBBack.visibility = View.VISIBLE
     }
 
     fun setLogoButtonEnabled(isEnable:Boolean) {

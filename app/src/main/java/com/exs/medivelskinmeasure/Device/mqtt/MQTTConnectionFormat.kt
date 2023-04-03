@@ -39,6 +39,12 @@ data class MQTTConnectionUserInfoRequestParam(
     val userkey: String
 )
 
+data class MQTTConnectionUserInfoResponse(
+    val response: String,
+    val result: String,
+    val reason:String?
+)
+
 
 /**
  * 배터리 체크
@@ -57,6 +63,14 @@ data class MQTTConnectionBatteryRequestParam(
 data class MQTTConnectionBatteryResponse(
     val response: String,
     val result: String
+)
+
+/**
+ * MQTT 상태 체크
+ */
+data class MQTTStatusResponse(
+    val response:String,
+    val result:String
 )
 
 /**

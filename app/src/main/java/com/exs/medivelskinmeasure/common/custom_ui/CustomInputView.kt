@@ -61,7 +61,12 @@ class CustomInputView : ConstraintLayout {
         addView(view)
 
         mETEdit = view.findViewById(R.id.ETCustomInputContent)
+        mETEdit.isFocusable = false
         mTVTitle = view.findViewById(R.id.TVCustonInputTitle)
+    }
+
+    fun getContentText():String {
+        return mETEdit.text.toString()
     }
 
 
